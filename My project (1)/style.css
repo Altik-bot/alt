@@ -2,5 +2,9 @@ h1 {
     display:flex;
     font-family: 'sans-serif';
     justify-content: space-between;
-    color: palevioletred;
+    color: black;
+}
+img{
+    display:flex;
+    justify-content: center;
 }
