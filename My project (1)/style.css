@@ -1,6 +1,6 @@
 h1 {
     display:flex;
-    font-family: 'sans-serif', Courier, monospace;
-    justify-content: center;
+    font-family: 'sans-serif';
+    justify-content: space-between;
     color: palevioletred;
 }
