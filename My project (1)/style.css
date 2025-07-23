@@ -1,7 +1,7 @@
 h1 {
     display:flex;
-    font-family: 'sans-serif';
-    justify-content: space-between;
+    font-family: sans-serif;
+    justify-content: center;
     color: black;
 }
 img{
