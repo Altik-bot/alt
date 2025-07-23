@@ -3,7 +3,8 @@
   justify-content: center;
 }
 h1 {
-    font-family: 'Space Grotesk' ,sans-serif;
+    font-family: 'Space Grotesk' , sans-serif;
+  font-weight:500;
     color: black;
     background:blue;
 }
