@@ -1,11 +1,9 @@
 .bro {
   display: flex;
-
   justify-content: center;
 }
 h1 {
-  
     font-family: 'Space Grotesk' ,sans-serif;
-   
     color: black;
+    background:blue;
 }
