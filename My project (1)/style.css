@@ -1,6 +1,6 @@
 h1 {
     display:flex;
-    font-family: sans-serif;
+    font-family: 'grotesk' ,sans-serif;
     justify-content: center;
     color: black;
 }
