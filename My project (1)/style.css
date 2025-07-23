@@ -1,5 +1,6 @@
 h1 {
-    font-family: 'Courier New', Courier, monospace;
-    text-align: center;
+    display:flex;
+    font-family: 'sans-serif', Courier, monospace;
+    justify-content: center;
     color: palevioletred;
 }
