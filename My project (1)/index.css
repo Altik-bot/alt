@@ -43,7 +43,7 @@ body {
 }
 .bar p{
 display:flex;
-   
+    margin-top:0;
   font-weight: 700;
   font-size: 20px;
    color:white;
