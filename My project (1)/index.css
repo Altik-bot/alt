@@ -40,3 +40,8 @@ body {
   font-size: 45px;
    color:white;
 }
+.bar p{
+   display: flex;
+   flex-direction: column;
+   justify-content:flex-end;
+}
