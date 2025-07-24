@@ -41,12 +41,15 @@ body {
    color:white;
 }
 .bar p{
-   display: flex;
-   flex-direction: column;
+
    
   font-weight: 700;
   font-size: 20px;
    color:white;
-   text-align:flex-end;
+     background-color: #f0f0f0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 
 }
