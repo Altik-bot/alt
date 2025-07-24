@@ -1,20 +1,39 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400&display=swap');
-.bro {
-  display: flex;
-justify-content: center;
-  align-items: center;
-  flex-direction: column;
-   margin-top:50;
+/* Подключение шрифта */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap');
+
+/* Общие стили */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Space Grotesk', sans-serif;
+  background-color: white;
 }
-h1 {
- 
-    font-family: 'Space Grotesk' , sans-serif;
-    font-weight:500;
-    color: black;
-    background:blue;
-}
+
+/* Верхняя чёрная полоса */
 .bar {
   width: 100%;
-  height: 50px;       /* You can change height */
-  background: blue;   /* Or any color */
+  height: 30px;
+  background-color: black;
+}
+
+/* Центрирование контента */
+.bro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 50px;
+}
+
+/* Изображение */
+.bro img {
+  max-width: 90%;
+  height: auto;
+}
+
+/* Заголовок */
+.bro h1 {
+  font-weight: 700;
+  font-size: 32px;
+  margin-top: 20px;
 }
