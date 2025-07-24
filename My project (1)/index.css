@@ -34,7 +34,8 @@ body {
 }
 
 /* Заголовок */
- h1 {
+ .bar h1 {
+  margin-top:10;
   font-weight: 700;
   font-size: 45px;
    color:white;
