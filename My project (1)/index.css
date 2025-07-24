@@ -28,7 +28,7 @@ body {
 
 /* Изображение */
 .bro img {
-  margin-top:20;
+  margin-top:0;
   max-width: 90%;
   height: auto;
 }
@@ -36,6 +36,6 @@ body {
 /* Заголовок */
  h1 {
   font-weight: 700;
-  font-size: 72px;
+  font-size: 45px;
    color:white;
 }
