@@ -34,7 +34,7 @@ body {
 /* Заголовок */
 .bro h1 {
   font-weight: 700;
-  font-size: 32px;
+  font-size: 72px;
   position:absolute;
-  margin-top: 20px;
+  color:white;
 }
