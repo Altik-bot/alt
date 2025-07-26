@@ -11,7 +11,7 @@ body {
 
 /* Верхняя чёрная полоса */
 .bar {
-   padding: 20px;
+   padding: 40px;
   margin:0;
   width: 100%;
   height: 400px;
@@ -44,7 +44,7 @@ body {
 }
 .bar2 p{
 display:flex;
-  padding:20;
+ 
     margin-top:0;
    flex-direction: column;
    justify-content: flex-start;
