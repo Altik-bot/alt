@@ -44,11 +44,11 @@ padding:5;
 .bar2 p{
 display:flex;
    font-family: 'Monserrat', sans-serif;
-    margin-top:0;
+
    flex-direction: column;
    justify-content: flex-start;
   align-items:flex-end;
-   margin-right:10;
+
   font-weight: 700;
   font-size: 35px;
    color:blue;
