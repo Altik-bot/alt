@@ -36,8 +36,7 @@ body {
 
 /* Заголовок */
  .bar h1 {
-  margin-top:10;
-  padding:20;
+
   font-weight: 700;
   font-size: 60px;
    color:white;
