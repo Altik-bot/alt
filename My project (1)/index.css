@@ -1,6 +1,6 @@
 /* Подключение шрифта */
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap');
 /* Общие стили */
 body {
  margin:0;
@@ -52,6 +52,7 @@ display:flex;
   font-weight: 700;
   font-size: 20px;
    color:blue;
+  font-family: 'Space Grotesk', sans-serif;
 
 
 
