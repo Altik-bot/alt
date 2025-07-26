@@ -63,4 +63,7 @@ color:white;
  height:80px;
  display:flex;
  align-items:flex-end;
+ flex-direction: column;
+   text-align: center;
+
 }
