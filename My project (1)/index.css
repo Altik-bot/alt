@@ -23,7 +23,7 @@ body {
 /* Центрирование контента */
 .bro {
  display: flex;
-  justify-content: space-between; /* or center / flex-start / flex-end */
+  justify-content: space-around; /* or center / flex-start / flex-end */
   align-items: center; 
  flex-direction:row;
 padding:5;
@@ -38,7 +38,7 @@ padding:5;
   width: 25%;
   height: auto;
  cursor:pointer;
- transition:size 0.3s;
+ transition:background-color 0.3s;
    
 }
 
@@ -77,7 +77,7 @@ background-color:white;
 
 }
 .bro img:hover {
- width:75%;
+ width:40%;
  height:auto;
 }
 .bar2 p:hover {
