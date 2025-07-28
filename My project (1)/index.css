@@ -37,6 +37,8 @@ padding:5;
  margin-top:0;
   width: 50%;
   height: auto;
+ cursor:pointer;
+ transition:0.3s;
    
 }
 
@@ -73,6 +75,10 @@ background-color:white;
  flex-direction: row-reverse;
 
 
+}
+.bro img:hover {
+ width:130%;
+ height:auto;
 }
 .bar2 p:hover {
   background-color: #555;
