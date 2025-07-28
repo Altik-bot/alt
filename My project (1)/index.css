@@ -22,12 +22,15 @@ body {
 
 /* Центрирование контента */
 .bro {
-  
+ display: flex;
+  justify-content: space-between; /* or center / flex-start / flex-end */
+  align-items: center; 
+ flex-direction:row;
 padding:5;
 }
 
 /* Изображение */
-.bar img {
+.bro img {
  displat:block;
    flex-direction: row;
    text-align: center;
