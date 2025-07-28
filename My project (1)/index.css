@@ -92,7 +92,7 @@ background-color:white;
  width:40%;
  height:auto;
 }
-.bar2 p:hover {
+.bar2 a:hover {
   background-color: #555;
   border-radius: 5px;
  color:white;
