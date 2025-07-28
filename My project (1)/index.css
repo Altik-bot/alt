@@ -26,10 +26,10 @@ padding:5;
 }
 
 /* Изображение */
- img {
+.bar img {
  display: flex;
   flex-direction: row-reverse;
-  align-items: center;
+ 
   justify-content: space-between;
  margin-top:0;
   width: 50%;
@@ -54,7 +54,8 @@ display:flex;
   font-weight: 700;
   font-size: 35px;
    color:blue;
- transition:0,5s;
+ cursor:pointer;
+ transition:background-color 0,5s;
 
 
 
