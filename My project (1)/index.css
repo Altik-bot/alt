@@ -29,7 +29,6 @@ padding:5;
 .bar img {
  display: flex;
   flex-direction: row-reverse;
- 
   justify-content: space-between;
  margin-top:0;
   width: 50%;
