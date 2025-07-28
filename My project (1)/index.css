@@ -20,26 +20,28 @@ body {
 
 /* Центрирование контента */
 .bro {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+  
 padding:5;
 }
 
 /* Изображение */
  img {
-  margin-top:0;
-  max-width: 50%;
-  height: 50%;
-   display: flex;
-  flex-direction:row;
+ display: flex;
+  flex-direction: row;
   align-items: center;
- justify-content:space-between;
+  justify-content: space-between;
+ margin-top:0;
+  max-width: 50%;
+  max-height: 50%;
+   
 }
 
 /* Заголовок */
  .bar h1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 700;
   font-size: 60px;
