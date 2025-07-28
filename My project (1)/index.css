@@ -12,7 +12,7 @@ body {
 /* Верхняя чёрная полоса */
 .bar {
    padding: 0;
- margin-top: 80px;
+ margin-top: 50px;
   width: 100%;
   height:auto;
   background-color: blue;
@@ -74,4 +74,5 @@ background-color:white;
 .bar2 p:hover {
   background-color: #555;
   border-radius: 5px;
+ color:white;
 }
