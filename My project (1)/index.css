@@ -27,7 +27,7 @@ padding:5;
 /* Изображение */
  img {
  display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   align-items: center;
   justify-content: space-between;
  margin-top:0;
@@ -50,11 +50,6 @@ padding:5;
 .bar2 p{
 display:flex;
    font-family: 'Monserrat', sans-serif;
-
-   flex-direction: column;
-   justify-content: flex-start;
-  align-items:flex-end;
-
   font-weight: 700;
   font-size: 35px;
    color:blue;
@@ -70,7 +65,6 @@ background-color:white;
  height:50px;
  display:flex;
  justify-content: space-between;
-
  flex-direction: row-reverse;
 
 
