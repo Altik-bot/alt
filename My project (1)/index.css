@@ -31,7 +31,7 @@ padding:5;
 
 /* Изображение */
 .bro img {
- displat:block;
+ display:block;
    flex-direction: row;
    text-align: center;
  margin-top:0;
@@ -80,6 +80,32 @@ padding:5;
  position: absolute;
 right: 10;
 }
+.about_me h1{
+display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-family: 'Monserrat', sans-serif;
+  font-weight: 700;
+  font-size: 60px;
+   color:balck;
+
+ 
+}
+.about_me img{
+ display:block;
+   flex-direction: row;
+   text-align: flex-start;
+ margin-top:0;
+ 
+  width: 25%;
+  height: auto;
+ cursor:pointer;
+ transition: 0.3s;
+   
+
+ 
+}
 .bar2 a{
 display:flex;
    font-family: 'Monserrat', sans-serif;
@@ -105,6 +131,10 @@ background-color:white;
 }
 .bro img:hover {
  width:40%;
+ height:auto;
+}
+.about_me img:hover{
+  width:40%;
  height:auto;
 }
 .bar2 a:hover {
