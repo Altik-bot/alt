@@ -67,10 +67,11 @@ padding:5;
    color:black;
 }
 .line {
-  width: 10px;
-  height: 100px;
+  width: 5px;
+  height: 400px;
   background-color: gray;
   margin: 20px 0;
+   text-align: flex-end;
 }
 .bar2 a{
 display:flex;
