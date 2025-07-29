@@ -97,12 +97,14 @@ display: flex;
 }
 .bar2 a{
 display:flex;
+  align-items: flex-end;
+  text-align: flex-end;
+ max-width:75%;
    font-family: 'Monserrat', sans-serif;
   font-weight: 700;
   font-size: 25px;
    color:blue;
- cursor:pointer;
- transition: 0.5s;
+
 
 
 
