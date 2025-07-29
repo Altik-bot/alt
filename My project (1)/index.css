@@ -68,6 +68,9 @@ padding:5;
    color:black;
  
 }
+.line-container {
+  position: relative;
+}
 .line {
   width: 5px;
   height: 400px;
