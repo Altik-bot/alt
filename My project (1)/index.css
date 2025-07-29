@@ -65,6 +65,7 @@ padding:5;
   font-size: 60px;
  background:white;
    color:black;
+ 
 }
 .line {
   width: 5px;
@@ -72,6 +73,8 @@ padding:5;
   background-color: gray;
   margin: 20px 0;
    text-align: flex-end;
+ position: absolute;
+right: 10;
 }
 .bar2 a{
 display:flex;
