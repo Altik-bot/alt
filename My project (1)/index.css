@@ -109,6 +109,18 @@ display:flex;
 
 
 }
+.bar2 a{
+display:flex;
+   font-family: 'Monserrat', sans-serif;
+  font-weight: 700;
+  font-size: 25px;
+   color:blue;
+ cursor:pointer;
+ transition: 0.5s;
+
+
+
+
 .bar2{
 background-color:white;
  padding:0;
