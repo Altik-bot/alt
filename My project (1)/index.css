@@ -87,7 +87,7 @@ display: flex;
    text-align: flex-start;
  margin-top:0;
  
-  width: 25%;
+  width: 15%;
   height: auto;
  cursor:pointer;
  transition: 0.3s;
@@ -147,7 +147,7 @@ background-color:white;
  height:auto;
 }
 .about_me img:hover{
-  width:40%;
+  width:30%;
  height:auto;
 }
 .bar2 a:hover {
