@@ -109,6 +109,16 @@ display:flex;
 
 
 }
+.about_me {
+display:flex;
+flex-direction:row;
+ justiffy-content:space-between;
+ margin:10px;
+}
+
+
+
+ 
 .bar2 a{
 display:flex;
    font-family: 'Monserrat', sans-serif;
