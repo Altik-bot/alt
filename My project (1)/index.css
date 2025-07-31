@@ -57,9 +57,10 @@ padding:5;
 .History_bar{
 
    display: flex;
-  flex-direction: column;
+
+ 
   align-items:center;
-  text-align:center;
+
  
  width:100%;
  height:auto;
@@ -84,8 +85,7 @@ padding:5;
 
  display:flex;
  justify-content:space-between;
-  align-items: center;
-  text-align: center;
+
    font-family: 'Space Grotesk', sans-serif;
   font-weight: 700;
   font-size: 20px;
