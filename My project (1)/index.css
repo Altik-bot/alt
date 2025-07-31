@@ -16,7 +16,7 @@ body {
  margin-top: 0px;
   width: 100%;
   height:auto;
-  background-color:#6C698D;
+  background-color:#22333B;
 
 }
 
@@ -54,7 +54,19 @@ padding:5;
   font-size: 60px;
    color:#D4D2D5;
 }
-.time_stamp h1{
+.History_bar{
+
+   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align:flex-start;
+ 
+ width:100%;
+ height:auto;
+ background:#EAE0D5;
+   
+}
+.History_bar h1{
 
   display: flex;
   flex-direction: column;
@@ -65,7 +77,7 @@ padding:5;
   font-size: 60px;
  max-width:100px;
  background:white;
-   color:black;
+   color:#0A0908;
  
 }
 .bar3{
@@ -74,7 +86,7 @@ padding:5;
  margin-top: 0px;
   width: 100%;
   height:auto;
-  background-color:#3E78B2;
+  background-color:#EAE0D5;
  border-radius: 15px;
  
 }
