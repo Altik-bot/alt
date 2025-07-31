@@ -84,8 +84,9 @@ padding:5;
 .History_bar p{
 
  display:flex;
+ flex-direction:row-reverse;
  justify-content:space-between;
-flex-direction:row-reverse;
+flex-wrap:wrap;
    font-family: 'Space Grotesk', sans-serif;
  max-width:25%;
   font-weight: 700;
