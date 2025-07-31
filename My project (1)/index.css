@@ -76,7 +76,7 @@ padding:5;
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 700;
   font-size: 60px;
- max-width:100px;
+
 
    color:#F8F5F1;
  
@@ -85,8 +85,9 @@ padding:5;
 
  display:flex;
  justify-content:space-between;
-
+flex-direction:row;
    font-family: 'Space Grotesk', sans-serif;
+ max-width:25%;
   font-weight: 700;
   font-size: 20px;
    color:#F8F5F1;
