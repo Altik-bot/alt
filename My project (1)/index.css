@@ -85,7 +85,7 @@ padding:5;
 
  display:flex;
  justify-content:space-between;
-flex-direction:row;
+flex-direction:row-reverse;
    font-family: 'Space Grotesk', sans-serif;
  max-width:25%;
   font-weight: 700;
