@@ -80,6 +80,17 @@ padding:5;
    color:#F8F5F1;
  
 }
+.History_bar p{
+
+ display:flex;
+ justify-content:space-between;
+  align-items: center;
+  text-align: center;
+   font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+   color:#F8F5F1;
+}
 .bar3{
 
    padding-bottom: 10px;
