@@ -252,38 +252,51 @@ flex-wrap:wrap;
 }
 .code button{
 
-background-color:white;
- padding:0;
+background-color:#6D5337;
+ margin:10px;
+ padding:10px;
  width:50%;
- height:auto;
+ height:50px;
  display:flex;
  justify-content: space-between;
  flex-direction: column;
  cursor:pointer;
  transition: 0.5s;
-
+ font-family: 'Space Grotesk', sans-serif;
+ font-weight: 700;
+ font-weight: 700;
+  font-size: 20px;
+   color:#EEE2DF;
+   border-radius: 5px;
 }
 .code button:hover {
-  background-color: #555;
-  border-radius: 5px;
- color:white;
+  background-color: #381501;
+  border-radius: 20px;
+  color:white;
+}
+.code button:active {
+  height:30px;
+  width: 30%;
 }
 .code input{
 
 background-color:white;
  padding:0;
- width:50%;
- height:auto;
+ width:60%;
+ height:30px;
  display:flex;
  justify-content: space-between;
  flex-direction: column;
  cursor:pointer;
  transition: 0.5s;
-
+ font-family: 'Space Grotesk', sans-serif;
+ font-weight: 700;
+ color:#6D5337;
+ border-radius: 5px;
 }
 .code input:hover {
   background-color: #555;
-  border-radius: 5px;
+  border-radius: 10px;
  color:white;
 }
 .imput{
