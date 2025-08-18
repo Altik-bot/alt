@@ -264,8 +264,26 @@ background-color:#6D5337;
  transition: 0.5s;
  font-family: 'Space Grotesk', sans-serif;
  font-weight: 700;
- font-weight: 700;
   font-size: 20px;
+   color:#EEE2DF;
+   border-radius: 5px;
+}
+.codex button{
+
+background-color:#6D5337;
+ margin:10px;
+
+ width:20%;
+ height:20px;
+ display:flex;
+ justify-content: space-between;
+ flex-direction: column;
+ cursor:pointer;
+ transition: 0.5s;
+ font-family: 'Space Grotesk', sans-serif;
+ font-weight: 700;
+
+  font-size: 10px;
    color:#EEE2DF;
    border-radius: 5px;
 }
