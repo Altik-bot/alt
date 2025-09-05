@@ -1,0 +1,127 @@
+/* Подключение шрифта */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Monserrat:wght@400;700&display=swap');
+/* Общие стили */
+body {
+ margin:0;
+ padding:0;
+
+ background: #000;;
+}
+.top_menu{
+ display: flex;
+ justify-content: flex-start;
+ align-items:flex-start;
+  
+
+}
+.top_menu button{
+  display: flex;
+  align-self:flex-start;
+margin:10px;
+  height: auto;
+  width:auto;
+  padding:10px;
+border-radius:20px;
+color: #000;
+background: #8a8585; ;
+border:#000;
+font-family:"Space Grotesk" ;
+gap:10px;
+}
+.butt{
+ display: flex;
+ justify-content: flex-end;
+ align-items:flex-end;
+
+}
+.butt button{
+  display: flex;
+  justify-content:flex-end;
+margin:10px;
+  height: auto;
+  width:auto;
+  padding:10px;
+border-radius:20px;
+color: #000;
+background: #8a8585; ;
+border:#000;
+font-family:"Space Grotesk";
+}
+.container2{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.landing img{
+width:auto;
+height:auto;
+margin-right:20px;
+position:relative;
+
+}
+.landing h1{
+   display:flex;
+
+color:#F8F0FB;
+font-family:"Space Grotesk";
+max-width:50%;
+font-size:40px;
+
+
+}
+.landing p{
+  display:flex;
+
+color:#7e7a80;
+font-family:"Space Grotesk";
+max-width:30%;
+font-size:20px;
+
+
+}
+
+.bar{
+  display:flex;
+width:100%;
+height: auto;
+background-color:#F8F0FB;
+align-items: center;
+flex-direction: column;
+justify-content: center;
+
+}
+.bar h1{
+  color:#444246;
+font-family:"Space Grotesk" ;
+font-size:50px;
+align-items: center;
+flex-direction: column;
+justify-content: center;
+}
+.image {
+  display: flex;
+justify-content: space-around;
+ align-items: center;
+}
+.htm{
+display: flex;
+  flex-direction: row;
+justify-content: space-around;
+
+
+}
+.htm p{
+  display: flex;
+  flex-direction: column;
+justify-content: space-around;
+align-items: center;
+color:#7e7a80;
+font-family:"Space Grotesk";
+max-width:30%;
+font-size:20px;
+
+}
+
+
+/* Верхняя чёрная полоса */
