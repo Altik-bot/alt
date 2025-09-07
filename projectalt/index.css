@@ -50,19 +50,13 @@ font-family:"Space Grotesk";
 }
 .container2{
   display:flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.landing img{
-width:auto;
-height:auto;
-margin-right:20px;
-position:relative;
+
 
 }
+
 .landing h1{
    display:flex;
-
+   margin: 20px;
 color:#F8F0FB;
 font-family:"Space Grotesk";
 max-width:50%;
@@ -72,7 +66,7 @@ font-size:40px;
 }
 .landing p{
   display:flex;
-
+ margin: 20px;
 color:#7e7a80;
 font-family:"Space Grotesk";
 max-width:30%;
@@ -122,6 +116,144 @@ max-width:30%;
 font-size:20px;
 
 }
+.props h1{
+  color:#beb7c4;
+font-family:"Space Grotesk" ;
+display:flex;
+align-items: center;
+flex-direction: column;
+justify-content: center;
+font-size: 40px;
+}
+.propd {
+  color:#beb7c4;
+font-family:"Space Grotesk" ;
+display:flex;
 
 
+align-items: center;
+flex-direction: row;
+justify-content: center;
+font-size: 20px;
+
+}
+.propd p{
+  color:#beb7c4;
+font-family:"Space Grotesk" ;
+display:flex;
+max-width: 30%;
+margin-top: 70px;
+align-items: center;
+flex-direction: column;
+justify-content: center;
+font-size: 20px;
+margin-bottom:20px
+
+}
+.propu {
+  color:#beb7c4;
+font-family:"Space Grotesk" ;
+display:flex;
+
+flex-direction: row;
+justify-content: space-around;
+
+}
+.propu p{
+  color:#beb7c4;
+font-family:"Space Grotesk" ;
+display:flex;
+max-width: 30%;
+
+justify-content: space-around;
+font-size: 20px;
+
+}
+.line{
+    color:#beb7c4;
+    width:40%;
+    height:42px;
+     border-bottom: 3px solid gray;
+  padding-bottom: 10px;
+}
+.lined{
+    color:#beb7c4;
+    width:270px;
+    height:42px;
+     border-bottom: 3px solid gray;
+  padding-bottom: 10px;
+  transform: rotate(-45deg);
+  margin-bottom: 100px;
+}
+.lineu{
+color:#beb7c4;
+    width:270px;
+    height:42px;
+     border-bottom: 3px solid gray;
+  padding-bottom: 10px;
+  transform: rotate(45deg);
+margin-bottom: 100px;
+}
+.ps{
+  display:flex;
+  align-items: center;
+flex-direction: column;
+justify-content: center;
+
+}
+.ps h1{
+    display:flex;
+  align-items: center;
+margin:50px;
+font-size: 40px;
+
+}
+.model{
+display:flex;
+flex-direction: column;
+
+  align-items: center;
+  margin:20px; 
+}
+.model p{
+
+  display:flex;
+flex-direction: column;
+ justify-content: center;
+  align-items: center;
+ margin: 20px;
+color:#7e7a80;
+font-family:"Space Grotesk";
+max-width:80%;
+font-size:20px;
+
+}
+model-viewer {
+  display:flex;
+
+  margin:20px; 
+  padding: auto;
+  width: 80%;
+   height: 400px;
+   background-color :#000;
+   }
 /* Верхняя чёрная полоса */
+.bar2{
+  display:flex;
+width:100%;
+
+background-color:#F8F0FB;
+align-items: center;
+flex-direction: column;
+justify-content: center;
+
+}
+.bar2 h1{
+  color:#444246;
+font-family:"Space Grotesk" ;
+font-size:50px;
+align-items: center;
+flex-direction: column;
+justify-content: center;
+}рхняя чёрная полоса */
+
