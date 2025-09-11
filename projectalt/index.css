@@ -12,10 +12,13 @@ body {
  display: flex;
  justify-content: flex-start;
  align-items:flex-start;
-  
+
 
 }
 .top_menu button{
+    box-shadow: 0px 0px 20px rgb(153, 255, 158);
+cursor: pointer ;
+transition: ease-in 0.3s;
   display: flex;
   align-self:flex-start;
 margin:10px;
@@ -24,10 +27,15 @@ margin:10px;
   padding:10px;
 border-radius:20px;
 color: #000;
-background: #8a8585; ;
+background: #e9f7e9; ;
 border:#000;
 font-family:"Space Grotesk" ;
+
 gap:10px;
+}
+.top_menu button:hover{
+background: #73e273; 
+      box-shadow: 0px 0px 40px rgb(153, 255, 158);
 }
 .butt{
  display: flex;
@@ -79,19 +87,19 @@ font-size:20px;
   display:flex;
 width:100%;
 height: auto;
-background-color:#F8F0FB;
+background: linear-gradient(to bottom, #226122, #3f81459c);
 align-items: center;
 flex-direction: column;
 justify-content: center;
-
 }
 .bar h1{
-  color:#444246;
+  color:#ffffff;
 font-family:"Space Grotesk" ;
 font-size:50px;
 align-items: center;
 flex-direction: column;
 justify-content: center;
+
 }
 .image {
   display: flex;
@@ -116,12 +124,50 @@ max-width:30%;
 font-size:20px;
 
 }
+.htm2 a{
+  display: flex;
+  flex-direction: column;
+justify-content: space-around;
+text-decoration: none;
+align-items: center;
+color:#cec1d4;
+font-family:"Space Grotesk";
+max-width:30%;
+font-size:20px;
+ margin :auto;
+ max-width: 50%;
+  text-shadow: 0 10px 5px rgb(255, 255, 255), 0px -10px 5px rgb(255, 255, 255);
+}
+.props_head{
+
+  display:flex;
+align-items: center;
+flex-direction: row;
+}
+.linek{
+    width: 25%;
+  height: 8px;                           /* толщина линии */
+  background: rgb(108, 179, 95);
+   box-shadow: 0px 0px 20px rgb(115, 214, 102);
+  border-radius: 10px;                   /* закругление краёв */
+  margin: 20px auto;                     
+}
+.circle{
+   width: 20px;
+      height: 20px;
+      display: flex;
+  flex-direction: row;
+      background: #43964d;
+      border-radius: 50%;
+      margin: 40px auto;
+      box-shadow: 0px 0px 20px rgb(115, 214, 102);
+}
 .props h1{
   color:#beb7c4;
 font-family:"Space Grotesk" ;
 display:flex;
 align-items: center;
-flex-direction: column;
+flex-direction: row;
 justify-content: center;
 font-size: 40px;
 }
@@ -170,6 +216,7 @@ font-size: 20px;
 
 }
 .line{
+  
     color:#beb7c4;
     width:40%;
     height:42px;
@@ -202,6 +249,7 @@ justify-content: center;
 
 }
 .ps h1{
+    text-shadow: 0px 0px 10px rgb(236, 255, 238);
     display:flex;
   align-items: center;
 margin:50px;
@@ -249,11 +297,11 @@ justify-content: center;
 
 }
 .bar2 h1{
-  color:#444246;
+  color:#226122;
 font-family:"Space Grotesk" ;
 font-size:50px;
 align-items: center;
 flex-direction: column;
 justify-content: center;
-}рхняя чёрная полоса */
+}
 
