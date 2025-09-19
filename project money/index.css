@@ -1,0 +1,203 @@
+/* Подключение шрифта */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Monserrat:wght@400;700&display=swap');
+/* Общие стили */
+body {
+
+background-color: #EDE0D4;
+}
+.Main{
+display:flex;
+align-items: center;
+flex-direction: column;
+
+
+}
+.Main h1 {
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 10;
+  font-size:75px;
+  color:#9C6644;
+ border:#7F5539 ;
+}
+.start{
+display:flex;
+align-items: center;
+flex-direction: column;
+
+
+
+}
+.start button{
+ width: 40%;
+ height: auto;
+    color:#EDE0D4;
+    font-family: "Space Grotesk", serif;
+      font-size:30px;
+    background-color: #7F5539;
+    border-radius: 50px;
+    border: none;
+    transition: ease-in 0.2s;
+    margin: 20px;
+}
+.start button:active{
+ width: 30%;
+  font-size:20px;
+   background-color: #442c1c;
+
+}
+.start button:hover{
+     width: 45%;
+      font-size:40px;
+}
+.bar_main{
+    display: flex;
+    display:flex;
+
+flex-direction: column;
+    padding:20px;
+    height: auto;
+    margin-top: 75px;
+    margin: 50px;
+    background-color :rgb(255, 255, 255);
+    border-radius: 50px;
+}
+.bar_main h2{
+ font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 10;
+  font-size:30px;
+  color:#9C6644;
+ border:#7F5539 ;
+max-width:70%;
+
+}
+.line {
+ background-color:#B08968;
+ width:100%;
+ height: 2px;
+ margin:20px
+
+}
+.question label{
+display:flex;
+align-items: center;
+
+flex-direction: row;
+  font-family: "Space Grotesk", serif;
+  font-optical-sizing: auto;
+  font-weight: 10;
+  font-size:20px;
+  color:#774936;
+ border:#7F5539 ;
+gap:20px;
+}
+.question h2{
+font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 10;
+  font-size:30px;
+  color:#9C6644;
+ border:#7F5539 ;
+max-width:70%;
+
+}
+  .but{
+  display:flex;
+align-items: center;
+flex-direction:column;
+
+
+  }
+.but button{
+ 
+  display:flex;
+align-items: center;
+flex-direction:column;
+ width: 30%;
+ height: auto;
+    color:#EDE0D4;
+    font-family: "Space Grotesk", serif;
+      font-size:30px;
+    background-color: #7F5539;
+    border-radius: 50px;
+    border: none;
+    transition: ease-in 0.1s;
+}
+
+.but button:active{
+ width: 30%;
+  font-size:20px;
+   background-color: #442c1c;
+
+}
+
+.question input{
+width:30px;
+transition: ease-in 0.2s;
+ margin:5px;
+  color:#432818;
+ border:#7F5539 ;
+gap:20px;
+}
+.question input:active{
+width:20px;
+color: #DEAB90;
+}
+.res{
+
+  display:flex;
+align-items: center;
+flex-direction:column;
+}
+.res button{
+
+display:flex;
+align-items: center;
+flex-direction:column;
+ width: 30%;
+ height: auto;
+    color:#7F5539;
+    font-family: "Space Grotesk", serif;
+      font-size:20px;
+    background-color: #EDE0D4;
+    border-radius: 50px;
+    border: #9C6644;
+    transition: ease-in 0.1s;
+   margin-top:20px;
+}
+
+.Main_2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  margin: 20px;
+}
+
+.Main_2 .column {
+  flex: 1;
+  max-width: 45%;
+}
+
+.Main_2 h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 50px;
+  margin-bottom: 15px;
+  text-align: center;
+ font-weight: 10;
+   color:#9C6644;
+
+}
+
+.Main_2 p {
+  background-color: #582F0E;
+  color: #ede0d4;
+  padding: 15px;
+  font-family: "Space Grotesk", serif;
+  font-size: 18px;
+  line-height: 1.5;
+  border-radius: 8px;
+}
+

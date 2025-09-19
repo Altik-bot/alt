@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="index.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Monserrat:wght@400;700&display=swap">
+    <title>site-from-alt</title>
+
+
+  </head>
+  <body>
+
+ 
+    
+    <div class="Main_2">
+  <div class="column">
+    
+    <h1>Profile</h1>
+        <p id = "result_prof"></p>
+        </div>
+  
+        <div class="column">
+    <h1>Advice</h1>
+      <p id = "result"></p>
+      </div>
+</div>
+
+  
+ <div class = "start">
+    <button onclick = "window.location.href='survey.html'"> Return to the survey</button>
+  </div>
+  <script>
+    const users =[
+  { id: 12131,
+    "profile": "Age: under 18  Income: no, Goal: short-term, Online banking: not comfortable, Spending: spends most",
+    "name": "Advice: Ask parents for pocket money and save a fixed part. Track expenses in a notebook. Start with small goals like a book or gadget. Learn basic rules of budgeting such as the simple '50-30-20' approach."
+  },
+  { id: 12231,
+    "profile": "Age: under 18, Income: no, Goal: long-term, Online banking: not comfortable, Spending: spends most",
+    "name": "Advice: Save for bigger goals like a bike or computer. Use a physical piggy bank or envelope system. Keep at least half of gift money instead of spending all. Build the habit of saving step by step."
+  },
+  { id: 12122,
+    "profile": "Age: under 18, Income: no, Goal: short-term, Online banking: somewhat comfortable, Spending: saves some",
+    "name": "Advice: Try a child banking card with parental approval. Practice managing a small balance through an app. Set goals for 1–3 months. Track spending in a simple app or spreadsheet."
+  },
+  { id: 12222,
+    "profile": "Age: under 18, Income: no, Goal: long-term, Online banking: somewhat comfortable, Spending: saves some",
+    "name": "Advice: Save for bigger plans like education or a trip. Use a joint account with parents to watch money grow. Calculate how many months you need to reach the goal. Keep motivation by marking progress regularly."
+  },
+  { id: 12112,
+    "profile": "Age: under 18, Income: no, Goal: short-term, Online banking: very comfortable, Spending: saves some",
+    "name": "Advice: Use a simple budgeting app. Set up automatic saving with parents’ help. Make a mini-budget: divide money for food, games, fun. Compare how fast money grows with different strategies."
+  },
+  { id: 21111,
+    "profile": "Age: 18–25, Income: yes, Goal: short-term, Online banking: very comfortable, Spending: spends most",
+    "name": "Advice: Set automatic transfers to a savings account right after payday. Use budgeting apps to control daily expenses. Limit impulse purchases by waiting 24 hours before buying. Focus on short goals like travel, gadgets, or events."
+  },
+  { id: 21212,
+    "profile": "Age: 18–25, Income: yes, Goal: long-term, Online banking: very comfortable, Spending: saves some",
+    "name": "Advice: Open a long-term savings account or investment account. Allocate at least 20% of income for savings. Build an emergency fund equal to 3–6 months of expenses. Start exploring safe investment options like index funds."
+  },
+  { id: 22121,
+    "profile": "Age: 18–25, Income: no, Goal: short-term, Online banking: somewhat comfortable, Spending: spends most",
+    "name": "Advice: Track all small earnings and spending carefully. Use free apps or simple spreadsheets. Save even small amounts from side jobs or gifts. Focus on short targets that don’t require big sums."
+  },
+  { id: 21232,
+    "profile": "Age: 18–25, Income: no, Goal: long-term, Online banking: not comfortable, Spending: saves some",
+    "name": "Advice: Use a notebook or physical envelopes for savings. Build consistency by putting aside money monthly, even if small. Learn the basics of online banking step by step. Keep money safe by using a trusted bank with beginner-friendly services."
+  },
+  { id: 21122,
+    "profile": "Age: 18–25, Income: yes, Goal: short-term, Online banking: somewhat comfortable, Spending: saves some",
+    "name": "Advice: Use bank apps to split income into categories: needs, wants, savings. Save for near goals like a laptop or vacation. Avoid unnecessary debt like consumer loans. Strengthen saving habits before moving to long-term investments."
+  },
+  { id: 31212,
+    "profile": "Age: 26–40, Income: yes, Goal: long-term, Online banking: very comfortable, Spending: saves some",
+    "name": "Advice: Build retirement savings through pensions or retirement accounts. Diversify investments into real estate, stocks, or bonds. Strengthen your emergency fund. Automate contributions to long-term savings every month."
+  },
+  { id: 31121,
+    "profile": "Age: 26–40, Income: yes, Goal: short-term, Online banking: somewhat comfortable, Spending: spends most",
+    "name": "Advice: Set strict spending limits using bank alerts. Prioritize paying off debt first. Save for near-term goals like family trips or home upgrades. Move from paper tracking to digital tools gradually."
+  },
+  { id: 32131,
+    "profile": "Age: 26–40, Income: no, Goal: short-term, Online banking: not comfortable, Spending: spends most",
+    "name": "Advice: Focus on stabilizing income through steady work or freelancing. Save small amounts in cash envelopes. Cut unnecessary subscriptions and recurring costs. Delay non-essential purchases until income is stable."
+  },
+  { id: 31222,
+    "profile": "Age: 26–40, Income: no, Goal: long-term, Online banking: somewhat comfortable, Spending: saves some",
+    "name": "Advice: Use flexible savings plans suited for irregular income. Build an emergency reserve first. Save from every freelance job or side gig. Learn low-risk investments like government bonds."
+  },
+  { id: 31231,
+    "profile": "Age: 26–40, Income: yes, Goal: long-term, Online banking: not comfortable, Spending: spends most",
+    "name": "Advice: Start with paper or offline budgeting if apps feel difficult. Focus on essential savings like children’s education or housing. Build discipline by automating transfers, even with bank staff help. Reduce unnecessary lifestyle expenses to free savings."
+  },
+  { id: 41212,
+    "profile": "Age: 40+, Income: yes, Goal: long-term, Online banking: very comfortable, Spending: saves some",
+    "name": "Advice: Strengthen retirement savings with consistent monthly deposits. Diversify investments across real estate, funds, and safe bonds. Review insurance coverage for health and family protection. Avoid high-risk investments close to retirement."
+  },
+  { id: 41121,
+    "profile": "Age: 40+, Income: yes, Goal: short-term, Online banking: somewhat comfortable, Spending: spends most",
+    "name": "Advice: Prioritize debt repayment to reduce financial pressure. Use simple digital tools to track expenses. Save for near-term goals like repairs, travel, or family needs. Cut spending leaks such as unused services."
+  },
+  { id: 42131,
+    "profile": "Age: 40+, Income: no, Goal: short-term, Online banking: not comfortable, Spending: spends most",
+    "name": "Advice: Focus on stabilizing income sources, even part-time or seasonal. Use cash-based budgeting to stay disciplined. Delay large purchases until income improves. Rely on safe, low-risk savings methods."
+  },
+  { id: 42222,
+    "profile": "Age: 40+, Income: no, Goal: long-term, Online banking: somewhat comfortable, Spending: saves some",
+    "name": "Advice: Focus on building a secure reserve with bank deposits. Explore passive income options like rental property or dividends. Save steadily, even in small amounts, to avoid future stress. Learn to use online tools step by step with guidance."
+  },
+  { id: 41232,
+    "profile": "Age: 40+, Income: yes, Goal: long-term, Online banking: not comfortable, Spending: saves some",
+    "name": "Advice: Work with a trusted bank adviser for savings planning. Set clear goals for retirement, healthcare, and family support. Stick to low-risk savings products like deposits and bonds. Improve digital skills gradually to manage money independently."
+  }
+]
+;
+const code = localStorage.getItem("resultCode");
+ 
+const lol = users.find(u => u.id == code);
+const lol2 = users.find(u => u.id == code);
+      document.getElementById("result").textContent = lol.name;
+    document.getElementById("result_prof").textContent = lol2.profile;
+    
+    
+  </script>
+  </body>
