@@ -43,6 +43,11 @@ body {
   height: auto;
   border-radius: 8px;
 }
+.en2 img:hover{
+    max-width: 150%;
+  height: auto;
+  border-radius: 8px;
+}
 
 /* Box section */
 .box {
@@ -113,6 +118,11 @@ body {
   margin-top: 20px;
 }
 
+.happy-new-year img:hover{
+    max-width: 150%;
+  height: auto;
+  border-radius: 8px;
+}
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .entry {
