@@ -37,7 +37,24 @@ body {
   justify-content: center;
   align-items: center;
 }
-
+.linek{
+    width: 35%;
+  height: 8px;                          
+  background: rgb(26, 23, 189);
+   box-shadow: 0px 0px 20px rgb(11, 29, 196);
+  border-radius: 10px;                   
+  margin: 20px auto;                     
+}
+.circle{
+   width: 20px;
+      height: 20px;
+      display: flex;
+  flex-direction: row;
+      background: #1a25bd;
+      border-radius: 50%;
+      margin: 40px auto;
+      box-shadow: 0px 0px 20px rgb(255, 255, 255);
+}
 .en2 img {
   max-width: 70%;
   height: auto;
@@ -53,10 +70,19 @@ body {
 
 /* Box section */
 .box {
+    
   text-align: center;
+  flex-direction:row;
   background-color: #0b2545;
   color: #caf0f8;
   padding: 40px 20px;
+}
+.head{
+
+  display:flex;
+align-items: center;
+flex-direction: row;
+
 }
 
 .box h2 {
