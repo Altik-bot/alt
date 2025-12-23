@@ -10,12 +10,29 @@ body {
 
 .entry {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   font-family: "Playfair Display", serif;
   font-size: 16px;
   width: 55%;
   margin: 40px;
   color: #0b2545;
+}
+.en2{
+ display: flex;
+  flex-direction: row;
+  font-family: "Playfair Display", serif;
+  font-size: 16px;
+  width: 50%;
+  height:50%;
+  margin: 40px;
+  color: #0b2545;
+ align-content:flex-end ;
+  justify-content: end;
+  align-items: end;
+  text-align: center;
+  gap:100px;
+
+
 }
 
 .box {
@@ -93,4 +110,9 @@ body {
 .goals p {
   font-size: 18px;
   max-width: 600px;
+}
+.goals img{
+    width:50%;
+    height:50%;
+    
 }
