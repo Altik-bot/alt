@@ -1,119 +1,134 @@
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
 
 body {
   background-color: #eef4ed;
-  margin: 0;
-  padding: 0;
+  font-family: "Montserrat", sans-serif;
+  color: #0b2545;
+  line-height: 1.6;
 }
 
+/* Entry section */
 .entry {
   display: flex;
-  flex-direction: row;
-  font-family: "Playfair Display", serif;
-  font-size: 16px;
-  width: 55%;
-  margin: 40px;
-  color: #0b2545;
-}
-.en2{
- display: flex;
-  flex-direction: row;
-  font-family: "Playfair Display", serif;
-  font-size: 16px;
-  max-width: 20%;
-  max-height:20%;
-  margin: 40px;
-  color: #0b2545;
- align-content:flex-end ;
-  justify-content: end;
-  align-items: end;
-  text-align: center;
-  gap:100px;
-
-
-}
-
-.box {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
   align-items: center;
-  text-align: center;
-  font-family: "Playfair Display", serif;
-  width: 100%;
-  padding: 30px;
-  background-color: #0b2545;
-  color: #caf0f8;
+  max-width: 1000px;
+  margin: 40px auto;
+  gap: 20px;
 }
 
-.box h1 {
+.en1 {
+  flex: 1 1 400px;
+  font-family: "Playfair Display", serif;
+}
+
+.en1 h1 {
   font-size: 36px;
   margin-bottom: 10px;
+}
+
+.en1 p {
+  font-size: 16px;
+}
+
+.en2 {
+  flex: 0 1 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.en2 img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Box section */
+.box {
+  text-align: center;
+  background-color: #0b2545;
+  color: #caf0f8;
+  padding: 40px 20px;
+}
+
+.box h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 32px;
+  margin-bottom: 15px;
 }
 
 .box p {
   font-family: "Space Grotesk", sans-serif;
   font-size: 18px;
   max-width: 600px;
+  margin: 0 auto;
 }
 
-.happy-new-year {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 40px 20px;
-  font-family: "Montserrat", sans-serif;
-  color: #0b2545;
+/* Message section */
+.message, .goals, .happy-new-year {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
 }
 
-.happy-new-year h2 {
-  font-size: 48px;
-  margin-bottom: 10px;
-}
-
-.happy-new-year p {
-  font-size: 18px;
-  max-width: 500px;
-}
-.message {
-  padding: 30px 40px;
-  font-family: "Montserrat", sans-serif;
-  color: #0b2545;
-  max-width: 700px;
-}
-
-.message h2 {
+.message h2, .goals h2, .happy-new-year h2 {
   font-size: 28px;
   margin-bottom: 10px;
 }
 
-.message p {
+.message p, .goals p, .happy-new-year p {
   font-size: 18px;
-  line-height: 1.5;
 }
 
+/* Goals section */
 .goals {
   background-color: #caf0f8;
-  padding: 40px;
-  font-family: "Montserrat", sans-serif;
-  color: #0b2545;
+  text-align: center;
+  padding: 40px 20px;
 }
 
-.goals h2 {
-  font-size: 30px;
-  margin-bottom: 10px;
+.goals img {
+  max-width: 200px;
+  width: 100%;
+  height: auto;
+  margin-top: 20px;
 }
 
-.goals p {
-  font-size: 18px;
-  max-width: 600px;
-}
-.goals img{
-      max-width: 20%;
-  max-height:20%;
-    
+/* Happy New Year section */
+.happy-new-year {
+  text-align: center;
+  padding: 40px 20px;
 }
 
+.happy-new-year h2 {
+  font-size: 36px;
+  margin-bottom: 15px;
+}
+
+.happy-new-year img {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+  margin-top: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .entry {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .en1, .en2 {
+    flex: 1 1 100%;
+  }
+
+  .box h2 {
+    font-size: 28px;
+  }
+
+  .happy-new-year h2 {
+    font-size: 28px;
+  }
+}
