@@ -13,12 +13,16 @@
 </head>
 <body>
     <div class = "header">
+        <div class="buttons">
         <button onclick="window.location.href='#main'">Проблема</button>
         <button onclick="window.location.href='#literature'">Литература</button>
         <button onclick="window.location.href='#modern'">Современный мир</button>
         <button onclick="window.location.href='#ideas'">Общие идеи</button>
         <button onclick="window.location.href='#OPPS'">Личная позиция</button>
-
+        </div>
+        <div class = "mode_switch">
+            <button id = "themeToggle">Изменить тему</button>
+        </div>
     </div>
 <div class = "main" id = "main">
     <div class = "container">
@@ -90,5 +94,6 @@ GitHub: @altik-bot</p>
 Альтаир Садыкбек
 </p>
 </div>
+<script> const themeBtn = document.getElementById("themeToggle"); themeBtn.addEventListener("click", () => { document.body.classList.toggle("dark"); if (document.body.classList.contains("dark")) { localStorage.setItem("theme", "dark"); themeBtn.textContent = "Изменить тему"; } else { localStorage.setItem("theme", "light"); themeBtn.textContent = "Изменить тему"; } }); window.addEventListener("DOMContentLoaded", () => { const savedTheme = localStorage.getItem("theme"); if (savedTheme === "dark") { document.body.classList.add("dark"); themeBtn.textContent = "Изменить тему"; } }); </script>
 </body>
 </html>
