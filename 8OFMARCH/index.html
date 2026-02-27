@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>8 of March</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class = "main">
+    <h1>Enter your name</h1>
+    <div class = "inputs">
+        <div class  ="container1">
+        <input type="text" id="password">
+    </div>
+    <div class  ="container2">
+        <button onclick="checkAccess()">Submit</button>
+    </div>
+        
+    
+
+<p id="error"></p>
+    </div>
+</div>
+<script>
+    function checkAccess() {
+  const pw = document.getElementById("password").value.toLowerCase().trim();
+
+  if (pw === "inzhu_a") {
+    window.location.href = "inzhu_a.html";
+  }
+  else if (pw === "korkem") {
+    window.location.href = "korkem.html";
+  }
+  else if (pw === "alima") {
+    window.location.href = "alima.html";
+  }
+  else if (pw === "dariya") {
+    window.location.href = "dariya.html";
+  }
+  else if (pw === "inzhu_s") {
+    window.location.href = "inzhu_s.html";
+  }
+  else {
+    document.getElementById("error").innerText = "Wrong name";
+  }
+}
+</script>
+</body>
