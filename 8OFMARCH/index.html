@@ -54,31 +54,39 @@ hands.setOptions({
 });
 
 hands.onResults((results) => {
-
+  // Clear canvas
   canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
   
-
+  // Draw the video frame
   canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
   
   if (results.multiHandLandmarks) {
-
+    // Loop through all detected hands
     for (const landmarks of results.multiHandLandmarks) {
- 
+      // Draw connectors and landmarks (optional)
       drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS);
       drawLandmarks(canvasCtx, landmarks);
       
-
+      // Now you can use the index finger tip
       const indexTip = landmarks[8];
       const x = indexTip.x * canvasElement.width;
       const y = indexTip.y * canvasElement.height;
       
-
+      // Draw a circle at the fingertip
       canvasCtx.beginPath();
       canvasCtx.arc(x, y, 20, 0, 2 * Math.PI);
       canvasCtx.fillStyle = "red";
       canvasCtx.fill();
     }
   }
+});
+
+const camera = new Camera(videoElement, {
+  onFrame: async () => {
+    await hands.send({ image: videoElement });
+  },
+  width: 640,
+  height: 480
 });
 
 camera.start();
