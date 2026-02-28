@@ -24,7 +24,7 @@
 
 
 
-  <video id="video" autoplay playsinline></video>
+ 
   <canvas id="canvas"></canvas>
 
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
@@ -96,12 +96,12 @@ hands.onResults((results) => {
       if (distance < 0.05) { 
         canvasCtx.beginPath();
         canvasCtx.arc(leftIndex.x * canvasElement.width, leftIndex.y * canvasElement.height, 15, 0, 2 * Math.PI);
-        canvasCtx.fillStyle = "green";
+        canvasCtx.fillStyle = "purple";
         canvasCtx.fill();
 
         canvasCtx.beginPath();
         canvasCtx.arc(rightIndex.x * canvasElement.width, rightIndex.y * canvasElement.height, 15, 0, 2 * Math.PI);
-        canvasCtx.fillStyle = "green";
+        canvasCtx.fillStyle = "purple";
         canvasCtx.fill();
       }
     }
@@ -144,6 +144,7 @@ camera.start();
 </script>
 </body>
 </html>
+
 
 
 
