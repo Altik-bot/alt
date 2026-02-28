@@ -4,8 +4,8 @@
   <title>MediaPipe Hand Tracking</title>
 </head>
 <body>
-  <video id="video" autoplay playsinline style = "display: none;"></video>
-  <canvas id="canvas"  width="640" height="480"></canvas>
+  <video id="video" autoplay playsinline style  ="display: none;"></video>
+  <canvas id="canvas"></canvas>
 
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
@@ -74,20 +74,43 @@ hands.onResults((results) => {
       const dy = leftIndex.y - rightIndex.y;
       const distance = Math.sqrt(dx * dx + dy * dy);
 
-      if (distance < 0.05) { // threshold for "touching"
-        // Draw green circles on both fingertips
-        canvasCtx.beginPath();
-        for( let i = 0;i<=70;i+=1){
-        canvasCtx.arc(leftIndex.x * canvasElement.width, leftIndex.y * canvasElement.height, i, 0, 2 * Math.PI);
-        canvasCtx.fillStyle = "purple";
-        canvasCtx.fill();
+      if (distance < 0.05) { // fingers touching
+        // Start timer if not started
+        if (!touchStartTime) touchStartTime = performance.now();
 
-        canvasCtx.beginPath();
-        canvasCtx.arc(rightIndex.x * canvasElement.width, rightIndex.y * canvasElement.height, i, 0, 2 * Math.PI);
-        canvasCtx.fillStyle = "purple";
-        canvasCtx.fill();
+        // Calculate how long fingers have been touching
+        touchDuration = (performance.now() - touchStartTime) / 1000; // seconds
+
+        // Draw pulsing circles
+        [leftIndex, rightIndex].forEach(index => {
+          canvasCtx.beginPath();
+          canvasCtx.arc(index.x * canvasElement.width, index.y * canvasElement.height, pulseRadius, 0, 2 * Math.PI);
+          canvasCtx.fillStyle = "purple";
+          canvasCtx.fill();
+        });
+
+        // Update pulse radius
+        if (pulseGrowing) {
+          pulseRadius += 1;
+          if (pulseRadius > 50) pulseGrowing = false;
+        } else {
+          pulseRadius -= 1;
+          if (pulseRadius < 10) pulseGrowing = true;
+        }
+
+        // Optional: Do something after 3 seconds
+        if (touchDuration >= 3) {
+          console.log("Fingers have been touching for 3 seconds!");
+          // You could trigger an action here, e.g., change color permanently
+        }
+
+      } else {
+        // Reset timer when fingers are apart
+        touchStartTime = null;
+        touchDuration = 0;
+        pulseRadius = 10;
+        pulseGrowing = true;
       }
-    }
     }
   }
 
@@ -105,5 +128,3 @@ const camera = new Camera(videoElement, {
 camera.start();</script>
 </body>
 </html>
-
-
