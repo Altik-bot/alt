@@ -54,24 +54,24 @@ hands.setOptions({
 });
 
 hands.onResults((results) => {
-  // Clear canvas
+  
   canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-  
-  // Draw the video frame
   canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
-  
+
+ 
   if (results.multiHandLandmarks) {
     // Loop through all detected hands
+      const landmarks = results.multiHandLandmarks[i];
+      const handedness = results.multiHandedness[i].label; 
+       const color = handedness === "Left" ? "red" : "blue";
     for (const landmarks of results.multiHandLandmarks) {
      
-       const landmarks = results.multiHandLandmarks[i];
-      const handedness = results.multiHandedness[i].label; // "Left" or "Right"
-       const color = handedness === "Left" ? "red" : "blue";
+     
 
      
 
       // Now you can use the index finger tip
-      const indexTip = landmarks[12];
+      const indexTip = landmarks[8];
       const x = indexTip.x * canvasElement.width;
       const y = indexTip.y * canvasElement.height;
       
@@ -118,4 +118,3 @@ camera.start();
 </script>
 </body>
 </html>
-
