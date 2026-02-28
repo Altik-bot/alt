@@ -5,7 +5,7 @@
 </head>
 <body>
   <video id="video" autoplay playsinline style  ="display: none;"></video>
-  <canvas id="canvas"></canvas>
+  <canvas id="canvas" width= "720" height = "600"></canvas>
 
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
@@ -93,10 +93,7 @@ hands.onResults((results) => {
         if (pulseGrowing) {
           pulseRadius += 1;
           if (pulseRadius > 50) pulseGrowing = false;
-        } else {
-          pulseRadius -= 1;
-          if (pulseRadius < 10) pulseGrowing = true;
-        }
+        } 
 
         // Optional: Do something after 3 seconds
         if (touchDuration >= 3) {
@@ -128,3 +125,4 @@ const camera = new Camera(videoElement, {
 camera.start();</script>
 </body>
 </html>
+
