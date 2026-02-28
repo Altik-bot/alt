@@ -5,7 +5,7 @@
 </head>
 <body>
   <video id="video" autoplay playsinline style="display: none;"></video>
-  <canvas id="canvas"></canvas>
+<canvas id="canvas" width="640" height="480" style="width:640px; height:480px;"></canvas>
 
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
@@ -105,4 +105,5 @@ const camera = new Camera(videoElement, {
 camera.start();</script>
 </body>
 </html>
+
 
