@@ -54,22 +54,31 @@ hands.setOptions({
 });
 
 hands.onResults((results) => {
-const indexTip = landmarks[8];
 
-const x = indexTip.x * canvasElement.width;
-const y = indexTip.y * canvasElement.height;
+  canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+  
 
-canvasCtx.beginPath();
-canvasCtx.arc(x, y, 20, 0, 2 * Math.PI);
-canvasCtx.fill();
-});
+  canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
+  
+  if (results.multiHandLandmarks) {
 
-const camera = new Camera(videoElement, {
-  onFrame: async () => {
-    await hands.send({ image: videoElement });
-  },
-  width: 640,
-  height: 480
+    for (const landmarks of results.multiHandLandmarks) {
+ 
+      drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS);
+      drawLandmarks(canvasCtx, landmarks);
+      
+
+      const indexTip = landmarks[8];
+      const x = indexTip.x * canvasElement.width;
+      const y = indexTip.y * canvasElement.height;
+      
+
+      canvasCtx.beginPath();
+      canvasCtx.arc(x, y, 20, 0, 2 * Math.PI);
+      canvasCtx.fillStyle = "red";
+      canvasCtx.fill();
+    }
+  }
 });
 
 camera.start();
@@ -98,4 +107,3 @@ camera.start();
 </script>
 </body>
 </html>
-
