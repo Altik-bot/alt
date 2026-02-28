@@ -54,39 +54,14 @@ hands.setOptions({
 });
 
 hands.onResults((results) => {
-  canvasCtx.save();
-canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+const indexTip = landmarks[8];
 
+const x = indexTip.x * canvasElement.width;
+const y = indexTip.y * canvasElement.height;
 
-canvasCtx.scale(-1, 1); 
-canvasCtx.translate(-canvasElement.width, 0);
-
-canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
-
-if (results.multiHandLandmarks) {
-  for (const landmarks of results.multiHandLandmarks) {
-    drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS);
-    drawLandmarks(canvasCtx, landmarks);
-  }
-}
-
-canvasCtx.restore();
-  canvasCtx.save();
-  canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-
-  canvasCtx.drawImage(
-    results.image, 0, 0,
-    canvasElement.width, canvasElement.height
-  );
-
-  if (results.multiHandLandmarks) {
-    for (const landmarks of results.multiHandLandmarks) {
-      drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS);
-      drawLandmarks(canvasCtx, landmarks);
-    }
-  }
-
-  canvasCtx.restore();
+canvasCtx.beginPath();
+canvasCtx.arc(x, y, 20, 0, 2 * Math.PI);
+canvasCtx.fill();
 });
 
 const camera = new Camera(videoElement, {
@@ -123,3 +98,4 @@ camera.start();
 </script>
 </body>
 </html>
+
