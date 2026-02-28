@@ -52,29 +52,62 @@ hands.setOptions({
   minDetectionConfidence: 0.5,
   minTrackingConfidence: 0.5
 });
-
 hands.onResults((results) => {
+
   canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+
+  canvasCtx.save();
+  canvasCtx.scale(-1, 1);
+  canvasCtx.translate(-canvasElement.width, 0);
+
+
   canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
 
   if (results.multiHandLandmarks && results.multiHandedness) {
-    for (let i = 0; i < results.multiHandLandmarks.length; i++) {
+    const handsCount = results.multiHandLandmarks.length;
+
+
+    for (let i = 0; i < handsCount; i++) {
       const landmarks = results.multiHandLandmarks[i];
-      const handedness = results.multiHandedness[i].label; // "Left" or "Right"
-      const color = handedness === "Left" ? "red" : "blue";
+      const handedness = results.multiHandedness[i].label;
 
      
-      // Draw a circle on the index finger tip
-      const indexTip = landmarks[12];
+      let color = handedness === "Left" ? "red" : "blue";
+
+   
+      const indexTip = landmarks[8];
       const x = indexTip.x * canvasElement.width;
       const y = indexTip.y * canvasElement.height;
 
+    
       canvasCtx.beginPath();
-      canvasCtx.arc(x, y, 10, 0, 2 * Math.PI);
+      canvasCtx.arc(x, y, 15, 0, 2 * Math.PI);
       canvasCtx.fillStyle = color;
       canvasCtx.fill();
     }
+    if (handsCount === 2) {
+      const leftIndex = results.multiHandLandmarks.find((_, i) => results.multiHandedness[i].label === "Left")[8];
+      const rightIndex = results.multiHandLandmarks.find((_, i) => results.multiHandedness[i].label === "Right")[8];
+
+      const dx = leftIndex.x - rightIndex.x;
+      const dy = leftIndex.y - rightIndex.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      if (distance < 0.05) { 
+        canvasCtx.beginPath();
+        canvasCtx.arc(leftIndex.x * canvasElement.width, leftIndex.y * canvasElement.height, 15, 0, 2 * Math.PI);
+        canvasCtx.fillStyle = "green";
+        canvasCtx.fill();
+
+        canvasCtx.beginPath();
+        canvasCtx.arc(rightIndex.x * canvasElement.width, rightIndex.y * canvasElement.height, 15, 0, 2 * Math.PI);
+        canvasCtx.fillStyle = "green";
+        canvasCtx.fill();
+      }
+    }
   }
+
+  canvasCtx.restore();
 });
 
 const camera = new Camera(videoElement, {
@@ -111,5 +144,6 @@ camera.start();
 </script>
 </body>
 </html>
+
 
 
