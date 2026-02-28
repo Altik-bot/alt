@@ -64,7 +64,12 @@ hands.onResults((results) => {
     // Loop through all detected hands
     for (const landmarks of results.multiHandLandmarks) {
      
-      
+       const landmarks = results.multiHandLandmarks[i];
+      const handedness = results.multiHandedness[i].label; // "Left" or "Right"
+       const color = handedness === "Left" ? "red" : "blue";
+
+     
+
       // Now you can use the index finger tip
       const indexTip = landmarks[8];
       const x = indexTip.x * canvasElement.width;
