@@ -20,13 +20,67 @@
     <div class  ="container2">
         <button onclick="checkAccess()">Submit</button>
     </div>
-        
     
+
+
+
+  <video id="video" autoplay playsinline></video>
+  <canvas id="canvas"></canvas>
+
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+  <script src="script.js"></script>
 
 <p id="error"></p>
     </div>
 </div>
 <script>
+  const videoElement = document.getElementById('video');
+const canvasElement = document.getElementById('canvas');
+const canvasCtx = canvasElement.getContext('2d');
+
+const hands = new Hands({
+  locateFile: (file) => {
+    return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
+  }
+});
+
+hands.setOptions({
+  maxNumHands: 2,
+  modelComplexity: 1,
+  minDetectionConfidence: 0.7,
+  minTrackingConfidence: 0.7
+});
+
+hands.onResults((results) => {
+  canvasCtx.save();
+  canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+
+  canvasCtx.drawImage(
+    results.image, 0, 0,
+    canvasElement.width, canvasElement.height
+  );
+
+  if (results.multiHandLandmarks) {
+    for (const landmarks of results.multiHandLandmarks) {
+      drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS);
+      drawLandmarks(canvasCtx, landmarks);
+    }
+  }
+
+  canvasCtx.restore();
+});
+
+const camera = new Camera(videoElement, {
+  onFrame: async () => {
+    await hands.send({ image: videoElement });
+  },
+  width: 640,
+  height: 480
+});
+
+camera.start();
     function checkAccess() {
   const pw = document.getElementById("password").value.toLowerCase().trim();
 
@@ -51,3 +105,4 @@
 }
 </script>
 </body>
+</html>
