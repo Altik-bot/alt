@@ -49,8 +49,8 @@ const hands = new Hands({
 hands.setOptions({
   maxNumHands: 2,
   modelComplexity: 1,
-  minDetectionConfidence: 0.7,
-  minTrackingConfidence: 0.7
+  minDetectionConfidence: 0.3,
+  minTrackingConfidence: 0.3
 });
 
 hands.onResults((results) => {
@@ -106,3 +106,4 @@ camera.start();
 </script>
 </body>
 </html>
+
