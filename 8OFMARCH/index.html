@@ -63,12 +63,9 @@ hands.onResults((results) => {
       const handedness = results.multiHandedness[i].label; // "Left" or "Right"
       const color = handedness === "Left" ? "red" : "blue";
 
-      // Optional: draw full hand skeleton
-      drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS);
-      drawLandmarks(canvasCtx, landmarks);
-
+     
       // Draw a circle on the index finger tip
-      const indexTip = landmarks[8];
+      const indexTip = landmarks[12];
       const x = indexTip.x * canvasElement.width;
       const y = indexTip.y * canvasElement.height;
 
@@ -114,4 +111,5 @@ camera.start();
 </script>
 </body>
 </html>
+
 
