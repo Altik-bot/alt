@@ -27,44 +27,67 @@ hands.setOptions({
   minDetectionConfidence: 0.7,
   minTrackingConfidence: 0.7
 });
-let maxRadius = 80;       // final radius after 4 seconds
-let minRadius = 10;       // starting radius
-let touchStartTime = null; 
-
 hands.onResults((results) => {
+  // Clear canvas
   canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+
+  // Mirror canvas for selfie view
   canvasCtx.save();
   canvasCtx.scale(-1, 1);
   canvasCtx.translate(-canvasElement.width, 0);
+
+  // Draw video frame
   canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
 
-  if (results.multiHandLandmarks && results.multiHandedness && results.multiHandLandmarks.length === 2) {
-    const leftIndex = results.multiHandLandmarks.find((_, i) => results.multiHandedness[i].label === "Left")[8];
-    const rightIndex = results.multiHandLandmarks.find((_, i) => results.multiHandedness[i].label === "Right")[8];
+  // Only proceed if at least one hand detected
+  if (results.multiHandLandmarks && results.multiHandedness) {
+    const handsCount = results.multiHandLandmarks.length;
 
-    const dx = leftIndex.x - rightIndex.x;
-    const dy = leftIndex.y - rightIndex.y;
-    const distance = Math.sqrt(dx * dx + dy * dy);
+    // Loop through all hands and draw circles
+    for (let i = 0; i < handsCount; i++) {
+      const landmarks = results.multiHandLandmarks[i];
+      const handedness = results.multiHandedness[i].label; // "Left" or "Right"
 
-    if (distance < 0.05) {
-      // Fingers touching, start timer
-      if (!touchStartTime) touchStartTime = performance.now();
-      const elapsed = (performance.now() - touchStartTime) / 1000; // seconds
+    
+      let color = handedness === "Left" ? "red" : "blue";
 
-      // Calculate radius: grow from minRadius to maxRadius over 4 seconds
-      let radius = Math.min(minRadius + (maxRadius - minRadius) * (elapsed / 4), maxRadius);
+     
 
-      // Draw circles on both fingertips
-      [leftIndex, rightIndex].forEach(index => {
+      // Index fingertip
+      const indexTip = landmarks[8];
+      const x = indexTip.x * canvasElement.width;
+      const y = indexTip.y * canvasElement.height;
+
+      // Draw circle
+      canvasCtx.beginPath();
+      canvasCtx.arc(x, y, 15 , 0, 2 * Math.PI);
+      canvasCtx.fillStyle = color;
+      canvasCtx.fill();
+    }
+
+    // Check distance between left and right index fingertips if two hands
+    if (handsCount === 2) {
+      const leftIndex = results.multiHandLandmarks.find((_, i) => results.multiHandedness[i].label === "Left")[8];
+      const rightIndex = results.multiHandLandmarks.find((_, i) => results.multiHandedness[i].label === "Right")[8];
+
+      const dx = leftIndex.x - rightIndex.x;
+      const dy = leftIndex.y - rightIndex.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      if (distance < 0.05) { // threshold for "touching"
+        // Draw green circles on both fingertips
         canvasCtx.beginPath();
-        canvasCtx.arc(index.x * canvasElement.width, index.y * canvasElement.height, radius, 0, 2 * Math.PI);
+        for( let i = 0;i<=70;i+=1){
+        canvasCtx.arc(leftIndex.x * canvasElement.width, leftIndex.y * canvasElement.height, i, 0, 2 * Math.PI);
         canvasCtx.fillStyle = "purple";
         canvasCtx.fill();
-      });
 
-    } else {
-      // Fingers apart, reset
-      touchStartTime = null;
+        canvasCtx.beginPath();
+        canvasCtx.arc(rightIndex.x * canvasElement.width, rightIndex.y * canvasElement.height, i, 0, 2 * Math.PI);
+        canvasCtx.fillStyle = "purple";
+        canvasCtx.fill();
+      }
+    }
     }
   }
 
