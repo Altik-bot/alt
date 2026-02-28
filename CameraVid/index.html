@@ -48,12 +48,10 @@ hands.onResults((results) => {
       const landmarks = results.multiHandLandmarks[i];
       const handedness = results.multiHandedness[i].label; // "Left" or "Right"
 
-      // Base color
+    
       let color = handedness === "Left" ? "red" : "blue";
 
-      // Draw skeleton (optional)
-      drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS);
-      drawLandmarks(canvasCtx, landmarks);
+     
 
       // Index fingertip
       const indexTip = landmarks[8];
@@ -62,7 +60,7 @@ hands.onResults((results) => {
 
       // Draw circle
       canvasCtx.beginPath();
-      canvasCtx.arc(x, y, 15, 0, 2 * Math.PI);
+      canvasCtx.arc(x, y, 15 , 0, 2 * Math.PI);
       canvasCtx.fillStyle = color;
       canvasCtx.fill();
     }
@@ -79,15 +77,17 @@ hands.onResults((results) => {
       if (distance < 0.05) { // threshold for "touching"
         // Draw green circles on both fingertips
         canvasCtx.beginPath();
-        canvasCtx.arc(leftIndex.x * canvasElement.width, leftIndex.y * canvasElement.height, 15, 0, 2 * Math.PI);
+        for( let i = 0;i<=70;i+=1){
+        canvasCtx.arc(leftIndex.x * canvasElement.width, leftIndex.y * canvasElement.height, i, 0, 2 * Math.PI);
         canvasCtx.fillStyle = "purple";
         canvasCtx.fill();
 
         canvasCtx.beginPath();
-        canvasCtx.arc(rightIndex.x * canvasElement.width, rightIndex.y * canvasElement.height, 15, 0, 2 * Math.PI);
+        canvasCtx.arc(rightIndex.x * canvasElement.width, rightIndex.y * canvasElement.height, i, 0, 2 * Math.PI);
         canvasCtx.fillStyle = "purple";
         canvasCtx.fill();
       }
+    }
     }
   }
 
