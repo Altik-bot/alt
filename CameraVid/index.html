@@ -4,8 +4,8 @@
   <title>MediaPipe Hand Tracking</title>
 </head>
 <body>
-  <video id="video" autoplay playsinline style="display: none;"></video>
-<canvas id="canvas" width="640" height="480" style="width:640px; height:480px;"></canvas>
+  <video id="video" autoplay playsinline></video>
+  <canvas id="canvas"></canvas>
 
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
@@ -27,67 +27,44 @@ hands.setOptions({
   minDetectionConfidence: 0.7,
   minTrackingConfidence: 0.7
 });
-hands.onResults((results) => {
-  // Clear canvas
-  canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+let maxRadius = 80;       // final radius after 4 seconds
+let minRadius = 10;       // starting radius
+let touchStartTime = null; 
 
-  // Mirror canvas for selfie view
+hands.onResults((results) => {
+  canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
   canvasCtx.save();
   canvasCtx.scale(-1, 1);
   canvasCtx.translate(-canvasElement.width, 0);
-
-  // Draw video frame
   canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
 
-  // Only proceed if at least one hand detected
-  if (results.multiHandLandmarks && results.multiHandedness) {
-    const handsCount = results.multiHandLandmarks.length;
+  if (results.multiHandLandmarks && results.multiHandedness && results.multiHandLandmarks.length === 2) {
+    const leftIndex = results.multiHandLandmarks.find((_, i) => results.multiHandedness[i].label === "Left")[8];
+    const rightIndex = results.multiHandLandmarks.find((_, i) => results.multiHandedness[i].label === "Right")[8];
 
-    // Loop through all hands and draw circles
-    for (let i = 0; i < handsCount; i++) {
-      const landmarks = results.multiHandLandmarks[i];
-      const handedness = results.multiHandedness[i].label; // "Left" or "Right"
+    const dx = leftIndex.x - rightIndex.x;
+    const dy = leftIndex.y - rightIndex.y;
+    const distance = Math.sqrt(dx * dx + dy * dy);
 
-    
-      let color = handedness === "Left" ? "red" : "blue";
+    if (distance < 0.05) {
+      // Fingers touching, start timer
+      if (!touchStartTime) touchStartTime = performance.now();
+      const elapsed = (performance.now() - touchStartTime) / 1000; // seconds
 
-     
+      // Calculate radius: grow from minRadius to maxRadius over 4 seconds
+      let radius = Math.min(minRadius + (maxRadius - minRadius) * (elapsed / 4), maxRadius);
 
-      // Index fingertip
-      const indexTip = landmarks[8];
-      const x = indexTip.x * canvasElement.width;
-      const y = indexTip.y * canvasElement.height;
-
-      // Draw circle
-      canvasCtx.beginPath();
-      canvasCtx.arc(x, y, 15 , 0, 2 * Math.PI);
-      canvasCtx.fillStyle = color;
-      canvasCtx.fill();
-    }
-
-    // Check distance between left and right index fingertips if two hands
-    if (handsCount === 2) {
-      const leftIndex = results.multiHandLandmarks.find((_, i) => results.multiHandedness[i].label === "Left")[8];
-      const rightIndex = results.multiHandLandmarks.find((_, i) => results.multiHandedness[i].label === "Right")[8];
-
-      const dx = leftIndex.x - rightIndex.x;
-      const dy = leftIndex.y - rightIndex.y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-
-      if (distance < 0.05) { // threshold for "touching"
-        // Draw green circles on both fingertips
+      // Draw circles on both fingertips
+      [leftIndex, rightIndex].forEach(index => {
         canvasCtx.beginPath();
-        for( let i = 0;i<=70;i+=1){
-        canvasCtx.arc(leftIndex.x * canvasElement.width, leftIndex.y * canvasElement.height, i, 0, 2 * Math.PI);
+        canvasCtx.arc(index.x * canvasElement.width, index.y * canvasElement.height, radius, 0, 2 * Math.PI);
         canvasCtx.fillStyle = "purple";
         canvasCtx.fill();
+      });
 
-        canvasCtx.beginPath();
-        canvasCtx.arc(rightIndex.x * canvasElement.width, rightIndex.y * canvasElement.height, i, 0, 2 * Math.PI);
-        canvasCtx.fillStyle = "purple";
-        canvasCtx.fill();
-      }
-    }
+    } else {
+      // Fingers apart, reset
+      touchStartTime = null;
     }
   }
 
@@ -105,5 +82,3 @@ const camera = new Camera(videoElement, {
 camera.start();</script>
 </body>
 </html>
-
-
