@@ -71,14 +71,14 @@ hands.onResults((results) => {
      
 
       // Now you can use the index finger tip
-      const indexTip = landmarks[8];
+      const indexTip = landmarks[12];
       const x = indexTip.x * canvasElement.width;
       const y = indexTip.y * canvasElement.height;
       
       // Draw a circle at the fingertip
       canvasCtx.beginPath();
       canvasCtx.arc(x, y, 10, 0, 2 * Math.PI);
-      canvasCtx.fillStyle = "red";
+      canvasCtx.fillStyle = color;
       canvasCtx.fill();
     }
   }
@@ -118,3 +118,4 @@ camera.start();
 </script>
 </body>
 </html>
+
