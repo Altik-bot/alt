@@ -25,8 +25,14 @@
 
 <p id="error"></p>
     </div>
+    <div class = "but">
+      <button onclick="goTo()" >Go to photo booth </button>
+</div>
 </div>
 <script>
+  function goTo(){
+    window.location.href = "photoBooth.html";
+  }
     function checkAccess() {
   const pw = document.getElementById("password").value.toLowerCase().trim();
 
