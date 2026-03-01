@@ -67,35 +67,51 @@ const camera = new Camera(videoElement, {
   height: 480
 });
 
-camera.start();
-const captureBtn = document.getElementById("capture");
+camera.start();const captureBtn = document.getElementById("capture");
 const downloadLink = document.getElementById("downloadLink");
+
+let photoCount = 0;       // tracks how many photos taken
+let totalPhotos = 4;      // total photos to take
 
 captureBtn.addEventListener("click", () => {
   if (countdownInterval) return; // prevent double click
 
-  countdown = 4;
+  photoCount = 0;
 
-  countdownInterval = setInterval(() => {
-    countdown--;
+  function takePhoto() {
+    countdown = 4;
 
-    if (countdown === 0) {
-      clearInterval(countdownInterval);
-      countdownInterval = null;
+    countdownInterval = setInterval(() => {
+      countdown--;
 
-      
-      const image = canvasElement.toDataURL("image/png");
-      downloadLink.href = image;
-      downloadLink.download = "photo.png";
-      downloadLink.click();
-    }
-  }, 1000);
+      if (countdown === 0) {
+        clearInterval(countdownInterval);
+        countdownInterval = null;
+
+        // Save the photo
+        const image = canvasElement.toDataURL("image/png");
+        downloadLink.href = image;
+        downloadLink.download = `photo_${photoCount + 1}.png`;
+        downloadLink.click();
+
+        photoCount++;
+
+        if (photoCount < totalPhotos) {
+          // take next photo after a short delay
+          setTimeout(takePhoto, 1000);
+        }
+      }
+    }, 1000);
+  }
+
+  takePhoto(); // start the first photo
 });
 camera.start();   
 
 </script>
 
 </body>
+
 
 
 
