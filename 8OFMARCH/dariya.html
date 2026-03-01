@@ -23,8 +23,8 @@ Keep aiming high and trust your abilities. You have strong potential.</p>
 </div>
 </div>
 <div class = "camera">
- <video id="video" autoplay playsinline ></video>
-  <canvas id="canvas"></canvas>
+ <video id="video" autoplay playsinline style{display:"none";}></video>
+ <canvas id="canvas" width="640" height="480"></canvas>
 </div>
 <button id="capture">Take Photo</button>
 <a id="downloadLink" style="display:none;"></a>
@@ -37,7 +37,9 @@ Keep aiming high and trust your abilities. You have strong potential.</p>
 const canvasElement = document.getElementById('canvas');
 const canvasCtx = canvasElement.getContext('2d');
 const camera = new Camera(videoElement, {
-  onFrame: async () => {
+  onFrame: async () => {  
+      canvasCtx.scale(-1, 1);
+canvasCtx.translate(-canvasElement.width, 0);
     await hands.send({ image: videoElement });
   },
   width: 640,
@@ -53,10 +55,10 @@ captureBtn.addEventListener("click", () => {
   downloadLink.download = "photo.png";
   downloadLink.click();
 });
-      canvasCtx.scale(-1, 1);
-canvasCtx.translate(-canvasElement.width, 0);
+   
 camera.start();
 </script>
 </body>
+
 
 
