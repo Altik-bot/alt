@@ -11,11 +11,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   height: 100vh;
   color: #FFE5EC;
   overflow: hidden;
   animation: bodyPulse 15s ease infinite;
-  flex-direction:column;
+  scroll-behavior: smooth;
 }
 
 @keyframes bodyPulse {
@@ -49,7 +50,11 @@ body {
   margin-bottom: 20px;
     color: #141418;
 }
+.camera canvas{
+  border:#FB6F92;
+  border-radius: 20px;
 
+}
 
 
 /* Card */
@@ -137,5 +142,4 @@ button:hover {
 
 button:active {
   transform: scale(0.98);
-
 }
