@@ -52,7 +52,7 @@ const camera = new Camera(videoElement, {
       canvasCtx.textAlign = "center";
       canvasCtx.textBaseline = "middle";
       canvasCtx.fillText(
-        countdown,
+        countdown - 1,
         canvasElement.width / 2,
         canvasElement.height / 2
       );
@@ -93,5 +93,6 @@ camera.start();
 </script>
 
 </body>
+
 
 
