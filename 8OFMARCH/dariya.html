@@ -37,10 +37,17 @@ Keep aiming high and trust your abilities. You have strong potential.</p>
 const canvasElement = document.getElementById('canvas');
 const canvasCtx = canvasElement.getContext('2d');
 const camera = new Camera(videoElement, {
-  onFrame: async () => {  
-      canvasCtx.scale(-1, 1);
-canvasCtx.translate(-canvasElement.width, 0);
-    await hands.send({ image: videoElement });
+  onFrame: async () => {
+    canvasCtx.save();
+    canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+
+    // Mirror
+    canvasCtx.scale(-1, 1);
+    canvasCtx.translate(-canvasElement.width, 0);
+
+    canvasCtx.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
+
+    canvasCtx.restore();
   },
   width: 640,
   height: 480
@@ -59,6 +66,7 @@ captureBtn.addEventListener("click", () => {
 camera.start();
 </script>
 </body>
+
 
 
 
