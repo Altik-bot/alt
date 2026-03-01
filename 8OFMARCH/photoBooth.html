@@ -71,7 +71,7 @@ const downloadLink = document.getElementById("downloadLink");
 captureBtn.addEventListener("click", () => {
   if (countdownInterval) return; // prevent double click
 
-  countdown = 3;
+  countdown = 4;
 
   countdownInterval = setInterval(() => {
     countdown--;
@@ -80,7 +80,7 @@ captureBtn.addEventListener("click", () => {
       clearInterval(countdownInterval);
       countdownInterval = null;
 
-      // take photo
+      
       const image = canvasElement.toDataURL("image/png");
       downloadLink.href = image;
       downloadLink.download = "photo.png";
@@ -93,4 +93,5 @@ camera.start();
 </script>
 
 </body>
+
 
