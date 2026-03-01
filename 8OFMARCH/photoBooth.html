@@ -26,116 +26,76 @@
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
   <script src="script.js"></script>
   <script>
-const videoElement = document.getElementById('video');
+      let countdown = 0;
+let countdownInterval = null;
+      const videoElement = document.getElementById('video');
 const canvasElement = document.getElementById('canvas');
 const canvasCtx = canvasElement.getContext('2d');
-
-const captureBtn = document.getElementById("capture");
-const downloadLink = document.getElementById("downloadLink");
-
-// ================= HANDS =================
-const hands = new Hands({
-  locateFile: (file) => {
-    return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
-  }
-});
-
-hands.setOptions({
-  maxNumHands: 2,
-  modelComplexity: 1,
-  minDetectionConfidence: 0.7,
-  minTrackingConfidence: 0.7
-});
-
-let currentEmoji = "";
-let countdown = null;  
-let takingPhoto = false;
-
-hands.onResults(results => {
-  canvasCtx.save();
-  canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-
-
-  canvasCtx.scale(-1, 1);
-  canvasCtx.translate(-canvasElement.width, 0);
-  canvasCtx.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
-  canvasCtx.restore();
-
-  currentEmoji = "";
-
-  if (results.multiHandLandmarks) {
-    for (let landmarks of results.multiHandLandmarks) {
-
-      const thumb = landmarks[12];
-      const index = landmarks[8];
-
-      const dx = thumb.x - index.x;
-      const dy = thumb.y - index.y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-
-      if (distance < 0.05) {
-        currentEmoji = "❤️";
-      }
-
-      const middle = landmarks[12];
-      if (index.y < landmarks[6].y && middle.y < landmarks[10].y) {
-        currentEmoji = "✨";
-      }
-    }
-  }
-
-
-  if (currentEmoji !== "") {
-    canvasCtx.font = "80px Arial";
-    canvasCtx.fillText(currentEmoji, canvasElement.width / 2 - 40, 100);
-  }
-
-  if (countdown !== null) {
-    canvasCtx.font = "120px Arial";
-    canvasCtx.fillStyle = "white";
-    canvasCtx.fillText(countdown, canvasElement.width / 2 - 30, canvasElement.height / 2);
-  }
-});
-
-
 const camera = new Camera(videoElement, {
   onFrame: async () => {
-    await hands.send({ image: videoElement });
+    canvasCtx.save();
+    canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+
+    // mirror
+    canvasCtx.scale(-1, 1);
+    canvasCtx.translate(-canvasElement.width, 0);
+
+    canvasCtx.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
+
+    // draw countdown number
+    if (countdown > 0) {
+      canvasCtx.restore(); // reset mirror for text
+      canvasCtx.save();
+
+      canvasCtx.fillStyle = "white";
+      canvasCtx.font = "bold 120px Montserrat";
+      canvasCtx.textAlign = "center";
+      canvasCtx.textBaseline = "middle";
+      if(countdown != 1){
+        canvasCtx.fillText(
+        countdown - 1,
+        canvasElement.width / 2,
+        canvasElement.height / 2
+      );
+      }
+    
+    }
+
+    canvasCtx.restore();
   },
   width: 640,
   height: 480
 });
 
 camera.start();
+const captureBtn = document.getElementById("capture");
+const downloadLink = document.getElementById("downloadLink");
 
+captureBtn.addEventListener("click", () => {
+  if (countdownInterval) return; // prevent double click
 
-function startCountdown() {
-  if (takingPhoto) return;
+  countdown = 4;
 
-  takingPhoto = true;
-  countdown = 3;
-
-  const interval = setInterval(() => {
+  countdownInterval = setInterval(() => {
     countdown--;
 
     if (countdown === 0) {
-      clearInterval(interval);
-      countdown = null;
-      takePhoto();
-      takingPhoto = false;
+      clearInterval(countdownInterval);
+      countdownInterval = null;
+
+      
+      const image = canvasElement.toDataURL("image/png");
+      downloadLink.href = image;
+      downloadLink.download = "photo.png";
+      downloadLink.click();
     }
   }, 1000);
-}
-
-
-function takePhoto() {
-  const image = canvasElement.toDataURL("image/png");
-  downloadLink.href = image;
-  downloadLink.download = "photo.png";
-  downloadLink.click();
-}
-
-captureBtn.addEventListener("click", startCountdown);
+});
+camera.start();   
 
 </script>
+
 </body>
+
+
+
