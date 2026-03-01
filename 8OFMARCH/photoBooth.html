@@ -51,11 +51,14 @@ const camera = new Camera(videoElement, {
       canvasCtx.font = "bold 120px Montserrat";
       canvasCtx.textAlign = "center";
       canvasCtx.textBaseline = "middle";
-      canvasCtx.fillText(
+      if(countdown != 1){
+        canvasCtx.fillText(
         countdown - 1,
         canvasElement.width / 2,
         canvasElement.height / 2
       );
+      }
+    
     }
 
     canvasCtx.restore();
@@ -93,6 +96,7 @@ camera.start();
 </script>
 
 </body>
+
 
 
 
