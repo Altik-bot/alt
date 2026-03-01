@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>8 of March</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class = "main">
+    <h1>Photo Booth</h1>
+</div>
+<div class = "camera">
+ <video id="video" autoplay playsinline style = "display:none";></video>
+ <canvas id="canvas" width="640" height="480"></canvas>
+</div>
+<button id="capture">Take Photo</button>
+<a id="downloadLink" style="display:none;"></a>
+
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+  <script src="script.js"></script>
+  <script>const videoElement = document.getElementById('video');
+const canvasElement = document.getElementById('canvas');
+const canvasCtx = canvasElement.getContext('2d');
+const camera = new Camera(videoElement, {
+  onFrame: async () => {
+    canvasCtx.save();
+    canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+
+    // Mirror
+    canvasCtx.scale(-1, 1);
+    canvasCtx.translate(-canvasElement.width, 0);
+
+    canvasCtx.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
+
+    canvasCtx.restore();
+  },
+  width: 640,
+  height: 480
+});
+const captureBtn = document.getElementById("capture");
+const downloadLink = document.getElementById("downloadLink");
+
+captureBtn.addEventListener("click", () => {
+  const image = canvasElement.toDataURL("image/png");
+
+  downloadLink.href = image;
+  downloadLink.download = "photo.png";
+  downloadLink.click();
+});
+   
+
+</script>
+</body>
