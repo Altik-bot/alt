@@ -53,7 +53,10 @@ captureBtn.addEventListener("click", () => {
   downloadLink.download = "photo.png";
   downloadLink.click();
 });
+      canvasCtx.scale(-1, 1);
+canvasCtx.translate(-canvasElement.width, 0);
 camera.start();
 </script>
 </body>
+
 
