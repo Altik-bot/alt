@@ -51,9 +51,9 @@ body {
     color: #141418;
 }
 .camera canvas{
-  border:#FB6F92;
+  border:#FB6F92 solid 5px;
   border-radius: 20px;
-
+  box-shadow: 0px 0px 10px #FFB3C6;
 }
 .but button{
   margin-top: 20px;
