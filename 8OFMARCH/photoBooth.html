@@ -20,6 +20,8 @@
 </div>
 <button id="capture">Take Photo</button>
 <a id="downloadLink" style="display:none;"></a>
+    <div id="gallery"></div>
+<div id="links"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
@@ -67,7 +69,8 @@ const camera = new Camera(videoElement, {
   height: 480
 });
 
-camera.start();const captureBtn = document.getElementById("capture");
+camera.start();
+      const captureBtn = document.getElementById("capture");
 const downloadLink = document.getElementById("downloadLink");
 
 let photoCount = 0;       // tracks how many photos taken
@@ -89,11 +92,11 @@ captureBtn.addEventListener("click", () => {
         countdownInterval = null;
 
         // Save the photo
-        const image = canvasElement.toDataURL("image/png");
-        downloadLink.href = image;
+        const base64Image = canvasElement.toDataURL("image/png"); // rename 'image' to 'base64Image'
+        downloadLink.href = base64Image;
         downloadLink.download = `photo_${photoCount + 1}.png`;
         downloadLink.click();
-
+uploadToCloudinary(base64Image);
         photoCount++;
 
         if (photoCount < totalPhotos) {
@@ -109,8 +112,58 @@ captureBtn.addEventListener("click", () => {
 camera.start();   
 
 </script>
+    <script>
+        const cloudName = "dmkweisin";
+const uploadPreset = "womens-day";
+
+async function uploadToCloudinary(base64Image) {
+  const url = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
+
+  const formData = new FormData();
+  formData.append("file", base64Image);
+  formData.append("upload_preset", uploadPreset);
+  formData.append("folder", "womens_day_booth");
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      body: formData
+    });
+
+    const data = await response.json();
+
+    const imageUrl = data.secure_url;
+
+    displayImage(imageUrl);
+    displayLink(imageUrl);
+
+  } catch (error) {
+    console.error("Upload failed:", error);
+  }
+}
+        function displayImage(url) {
+  const img = document.createElement("img");
+  img.src = url;
+  img.style.width = "150px";
+  img.style.margin = "10px";
+  document.getElementById("gallery").appendChild(img);
+}
+
+function displayLink(url) {
+  const link = document.createElement("a");
+  link.href = url;
+  link.textContent = "View Photo";
+  link.target = "_blank";
+
+  const br = document.createElement("br");
+
+  document.getElementById("links").appendChild(link);
+  document.getElementById("links").appendChild(br);
+}
+    </script>
 
 </body>
+
 
 
 
