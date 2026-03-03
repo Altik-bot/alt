@@ -20,8 +20,6 @@
 </div>
 <button id="capture">Take Photo</button>
 <a id="downloadLink" style="display:none;"></a>
-    <div id="gallery"></div>
-<div id="links"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
@@ -70,101 +68,33 @@ const camera = new Camera(videoElement, {
 });
 
 camera.start();
-      const captureBtn = document.getElementById("capture");
+const captureBtn = document.getElementById("capture");
 const downloadLink = document.getElementById("downloadLink");
-
-let photoCount = 0;       // tracks how many photos taken
-let totalPhotos = 4;      // total photos to take
 
 captureBtn.addEventListener("click", () => {
   if (countdownInterval) return; // prevent double click
 
-  photoCount = 0;
+  countdown = 4;
 
-  function takePhoto() {
-    countdown = 4;
+  countdownInterval = setInterval(() => {
+    countdown--;
 
-    countdownInterval = setInterval(() => {
-      countdown--;
+    if (countdown === 0) {
+      clearInterval(countdownInterval);
+      countdownInterval = null;
 
-      if (countdown === 0) {
-        clearInterval(countdownInterval);
-        countdownInterval = null;
-
-        // Save the photo
-        const base64Image = canvasElement.toDataURL("image/png"); // rename 'image' to 'base64Image'
-        downloadLink.href = base64Image;
-        downloadLink.download = `photo_${photoCount + 1}.png`;
-        downloadLink.click();
-uploadToCloudinary(base64Image);
-        photoCount++;
-
-        if (photoCount < totalPhotos) {
-          // take next photo after a short delay
-          setTimeout(takePhoto, 1000);
-        }
-      }
-    }, 1000);
-  }
-
-  takePhoto(); // start the first photo
+      
+      const image = canvasElement.toDataURL("image/png");
+      downloadLink.href = image;
+      downloadLink.download = "photo.png";
+      downloadLink.click();
+    }
+  }, 1000);
 });
 camera.start();   
 
 </script>
-    <script>
-        const cloudName = "dmkweisin";
-const uploadPreset = "womens-day";
-
-async function uploadToCloudinary(base64Image) {
-  const url = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
-
-  const formData = new FormData();
-  formData.append("file", base64Image);
-  formData.append("upload_preset", uploadPreset);
-  formData.append("folder", "womens_day_booth");
-
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      body: formData
-    });
-
-    const data = await response.json();
-
-    const imageUrl = data.secure_url;
-
-    displayImage(imageUrl);
-    displayLink(imageUrl);
-
-  } catch (error) {
-    console.error("Upload failed:", error);
-  }
-}
-        function displayImage(url) {
-  const img = document.createElement("img");
-  img.src = url;
-  img.style.width = "150px";
-  img.style.margin = "10px";
-  document.getElementById("gallery").appendChild(img);
-}
-
-function displayLink(url) {
-  const link = document.createElement("a");
-  link.href = url;
-  link.textContent = "View Photo";
-  link.target = "_blank";
-
-  const br = document.createElement("br");
-
-  document.getElementById("links").appendChild(link);
-  document.getElementById("links").appendChild(br);
-}
-    </script>
 
 </body>
-
-
-
 
 
