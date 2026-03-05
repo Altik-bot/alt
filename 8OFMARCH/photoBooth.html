@@ -30,77 +30,92 @@
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
   <script src="script.js"></script>
-<script>
-let countdown = 0;
+  <script>
+      let countdown = 0;
 let countdownInterval = null;
-
-const videoElement = document.getElementById('video');
+      const videoElement = document.getElementById('video');
 const canvasElement = document.getElementById('canvas');
 const canvasCtx = canvasElement.getContext('2d');
-
 const camera = new Camera(videoElement, {
   onFrame: async () => {
-
+    canvasCtx.save();
     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
 
-    // mirror camera
-    canvasCtx.save();
+    // mirror
     canvasCtx.scale(-1, 1);
     canvasCtx.translate(-canvasElement.width, 0);
-    canvasCtx.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
-    canvasCtx.restore();
 
-    // draw countdown
+    canvasCtx.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
+
+    // draw countdown number
     if (countdown > 0) {
+      canvasCtx.restore(); // reset mirror for text
+      canvasCtx.save();
+
       canvasCtx.fillStyle = "white";
       canvasCtx.font = "bold 120px Montserrat";
       canvasCtx.textAlign = "center";
       canvasCtx.textBaseline = "middle";
-
-      canvasCtx.fillText(
-        countdown,
+      if(countdown != 1){
+        canvasCtx.fillText(
+        countdown - 1,
         canvasElement.width / 2,
         canvasElement.height / 2
       );
+      }
+    
     }
+
+    canvasCtx.restore();
   },
   width: 640,
   height: 480
 });
 
-const captureBtn = document.getElementById("capture");
+camera.start();const captureBtn = document.getElementById("capture");
 const downloadLink = document.getElementById("downloadLink");
 
+let photoCount = 0;       // tracks how many photos taken
+let totalPhotos = 4;      // total photos to take
+
 captureBtn.addEventListener("click", () => {
+  if (countdownInterval) return; // prevent double click
 
-  if (countdownInterval) return;
+  photoCount = 0;
 
-  countdown = 3;
+  function takePhoto() {
+    countdown = 4;
 
-  countdownInterval = setInterval(() => {
+    countdownInterval = setInterval(() => {
+      countdown--;
 
-    countdown--;
+      if (countdown === 0) {
+        clearInterval(countdownInterval);
+        countdownInterval = null;
 
-    if (countdown === 0) {
+        // Save the photo
+        const image = canvasElement.toDataURL("image/png");
+        downloadLink.href = image;
+        downloadLink.download = `photo_${photoCount + 1}.png`;
+        downloadLink.click();
 
-      clearInterval(countdownInterval);
-      countdownInterval = null;
+        photoCount++;
 
-      const image = canvasElement.toDataURL("image/png");
-      downloadLink.href = image;
-      downloadLink.download = "photo.png";
-      downloadLink.click();
-    }
+        if (photoCount < totalPhotos) {
+          // take next photo after a short delay
+          setTimeout(takePhoto, 1000);
+        }
+      }
+    }, 1000);
+  }
 
-  }, 1000);
-
+  takePhoto(); // start the first photo
 });
+camera.start();   
 
-camera.start();
 </script>
 
 </body>
-
 
 
 
