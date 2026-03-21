@@ -148,43 +148,49 @@
 
     function classifyContour(contour) {
       const area = cv.contourArea(contour);
-      if (area < 2000) return null;
+      if (area < 3000) return null;
 
       const perimeter = cv.arcLength(contour, true);
-      if (perimeter < 100) return null;
+      if (perimeter < 150) return null;
 
+      const circularity = (4 * Math.PI * area) / (perimeter * perimeter || 1);
+
+      const rect     = cv.boundingRect(contour);
+      const hull     = new cv.Mat();
+      cv.convexHull(contour, hull);
+      const hullArea = cv.contourArea(hull);
+      hull.delete();
+      const solidity = area / (hullArea || 1);
+
+      // Check circle/ellipse FIRST using circularity before polygon approximation
+      // Circles and ellipses have high circularity and high solidity
+      if (circularity > 0.72 && solidity > 0.80 && contour.rows >= 5) {
+        let ratio = 1;
+        try {
+          const re    = cv.fitEllipse(contour);
+          const major = Math.max(re.size.width, re.size.height);
+          const minor = Math.min(re.size.width, re.size.height);
+          ratio = minor / (major || 1);
+        } catch(e) {}
+        return { type: ratio > 0.80 ? 'circle' : 'ellipse', rect, area, perimeter, circularity, solidity };
+      }
+
+      // Use a tighter epsilon for polygon shapes so we don't over-simplify
       const approx = new cv.Mat();
-      cv.approxPolyDP(contour, approx, 0.04 * perimeter, true);
+      cv.approxPolyDP(contour, approx, 0.02 * perimeter, true);
       const vertices = approx.rows;
       approx.delete();
 
-      const rect        = cv.boundingRect(contour);
-      const hull        = new cv.Mat();
-      cv.convexHull(contour, hull);
-      const hullArea    = cv.contourArea(hull);
-      hull.delete();
-      const solidity    = area / (hullArea || 1);
-      const circularity = (4 * Math.PI * area) / (perimeter * perimeter || 1);
-
       let type = null;
 
-      if (vertices >= 7 && circularity > 0.75) {
-        let ratio = 1;
-        if (contour.rows >= 5) {
-          try {
-            const re = cv.fitEllipse(contour);
-            const major = Math.max(re.size.width, re.size.height);
-            const minor = Math.min(re.size.width, re.size.height);
-            ratio = minor / (major || 1);
-          } catch(e) {}
-        }
-        type = ratio > 0.82 ? 'circle' : 'ellipse';
-      } else if (vertices === 3 && solidity > 0.75) {
+      if (vertices === 3 && solidity > 0.80) {
         type = 'triangle';
-      } else if (vertices === 4) {
+      } else if (vertices === 4 && solidity > 0.85) {
+        // Check each angle is close to 90 degrees for rectangle/square
         const ar = rect.width / (rect.height || 1);
-        type = (ar > 0.85 && ar < 1.15) ? 'square' : 'rectangle';
+        type = (ar > 0.90 && ar < 1.10) ? 'square' : 'rectangle';
       }
+      // Ignore everything else (complex/noisy contours)
 
       return type ? { type, rect, area, perimeter, vertices, circularity, solidity } : null;
     }
@@ -286,8 +292,8 @@
         hierarchy = new cv.Mat();
 
         cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY);
-        cv.GaussianBlur(gray, blurred, new cv.Size(9, 9), 2);
-        cv.Canny(blurred, edges, 30, 100);
+        cv.GaussianBlur(gray, blurred, new cv.Size(7, 7), 1.5);
+        cv.Canny(blurred, edges, 50, 150);
 
         kernel = cv.getStructuringElement(cv.MORPH_RECT, new cv.Size(3, 3));
         cv.dilate(edges, dilated, kernel);
@@ -336,4 +342,3 @@
   </script>
 </body>
 </html>
-
