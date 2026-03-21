@@ -132,7 +132,7 @@
     }
 
     function startCamera(cb) {
-      navigator.mediaDevices.getUserMedia({ video: { width: W, height: H }, audio: false })
+      navigator.mediaDevices.getUserMedia({ video: { width: W, height: H, facingMode: { exact: 'environment' } }, audio: false })
         .then(stream => {
           video.srcObject = stream;
           video.onloadedmetadata = () => {
@@ -196,11 +196,11 @@
       const cx = Math.round(x + width / 2);
       const cy = Math.round(y + height / 2);
 
-      // Contour points, mirror X for selfie view
+      // Contour points
       const pts = [];
       for (let i = 0; i < contour.rows; i++) {
         pts.push({
-          x: W - contour.data32S[i * 2],
+          x: contour.data32S[i * 2],
           y: contour.data32S[i * 2 + 1]
         });
       }
@@ -219,32 +219,30 @@
       ctx.fillStyle = `rgba(${r},${g},${b},0.07)`;
       ctx.fill();
 
-      // Bounding box (mirror X)
-      const bx = W - x - width;
+      // Bounding box
       ctx.strokeStyle = `rgba(${r},${g},${b},0.5)`;
       ctx.lineWidth = 1;
       ctx.setLineDash([5, 4]);
-      ctx.strokeRect(bx, y, width, height);
+      ctx.strokeRect(x, y, width, height);
       ctx.setLineDash([]);
 
-      // Center crosshair (mirror X)
-      const mcx = W - cx;
+      // Center crosshair
       ctx.strokeStyle = color;
       ctx.lineWidth = 1.5;
       ctx.shadowColor = color;
       ctx.shadowBlur = 6;
       ctx.beginPath();
-      ctx.moveTo(mcx - 14, cy); ctx.lineTo(mcx + 14, cy);
-      ctx.moveTo(mcx, cy - 14); ctx.lineTo(mcx, cy + 14);
+      ctx.moveTo(cx - 14, cy); ctx.lineTo(cx + 14, cy);
+      ctx.moveTo(cx, cy - 14); ctx.lineTo(cx, cy + 14);
       ctx.stroke();
       ctx.shadowBlur = 0;
 
       ctx.beginPath();
-      ctx.arc(mcx, cy, 5, 0, 2 * Math.PI);
+      ctx.arc(cx, cy, 5, 0, 2 * Math.PI);
       ctx.fillStyle = color;
       ctx.fill();
 
-      return { cx: mcx, cy };
+      return { cx, cy };
     }
 
     function updatePanel(shapes) {
@@ -272,12 +270,8 @@
     function processFrame() {
       if (!running) return;
 
-      // Draw mirrored video onto canvas
-      ctx.save();
-      ctx.scale(-1, 1);
-      ctx.translate(-W, 0);
+      // Draw video frame as-is (back camera, no mirror needed)
       ctx.drawImage(video, 0, 0, W, H);
-      ctx.restore();
 
       let src, gray, blurred, edges, dilated, contours, hierarchy, kernel;
 
@@ -342,3 +336,4 @@
   </script>
 </body>
 </html>
+
