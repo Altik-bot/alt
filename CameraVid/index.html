@@ -148,10 +148,10 @@
 
     function classifyContour(contour) {
       const area = cv.contourArea(contour);
-      if (area < 3000) return null;
+      if (area < 2000) return null;
 
       const perimeter = cv.arcLength(contour, true);
-      if (perimeter < 150) return null;
+      if (perimeter < 120) return null;
 
       const circularity = (4 * Math.PI * area) / (perimeter * perimeter || 1);
 
@@ -185,10 +185,9 @@
 
       if (vertices === 3 && solidity > 0.80) {
         type = 'triangle';
-      } else if (vertices === 4 && solidity > 0.85) {
-        // Check each angle is close to 90 degrees for rectangle/square
+      } else if (vertices === 4 && solidity > 0.70) {
         const ar = rect.width / (rect.height || 1);
-        type = (ar > 0.90 && ar < 1.10) ? 'square' : 'rectangle';
+        type = (ar > 0.85 && ar < 1.15) ? 'square' : 'rectangle';
       }
       // Ignore everything else (complex/noisy contours)
 
