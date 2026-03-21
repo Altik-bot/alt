@@ -13,44 +13,33 @@
       align-items: center;
       min-height: 100vh;
       padding: 20px;
+      gap: 12px;
     }
-
     h1 {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: #00e5ff;
-      margin-bottom: 16px;
     }
-
     #main {
       display: flex;
       gap: 16px;
       align-items: flex-start;
     }
-
-    #canvasWrapper {
-      position: relative;
-    }
-
-    canvas {
+    #output-canvas {
       display: block;
       border: 1px solid #333;
     }
-
-    #hidden-video { display: none; }
-
     #info-panel {
-      width: 220px;
+      width: 230px;
       min-height: 480px;
       background: #141414;
       border: 1px solid #222;
       padding: 14px;
       overflow-y: auto;
     }
-
     #info-panel h2 {
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       color: #555;
@@ -58,24 +47,20 @@
       border-bottom: 1px solid #222;
       padding-bottom: 8px;
     }
-
     .shape-card {
       border: 1px solid #2a2a2a;
-      border-radius: 4px;
+      border-radius: 3px;
       padding: 10px;
       margin-bottom: 10px;
       background: #1a1a1a;
-      transition: border-color 0.2s;
     }
-
     .shape-card.circle    { border-left: 3px solid #00e5ff; }
     .shape-card.ellipse   { border-left: 3px solid #ff9800; }
     .shape-card.rectangle { border-left: 3px solid #76ff03; }
     .shape-card.square    { border-left: 3px solid #76ff03; }
     .shape-card.triangle  { border-left: 3px solid #e040fb; }
-
     .shape-name {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: bold;
       text-transform: uppercase;
       letter-spacing: 0.1em;
@@ -86,53 +71,34 @@
     .shape-name.rectangle { color: #76ff03; }
     .shape-name.square    { color: #76ff03; }
     .shape-name.triangle  { color: #e040fb; }
-
-    .shape-info {
-      font-size: 0.7rem;
-      color: #888;
-      line-height: 1.8;
-    }
-
-    .shape-info span {
-      color: #ccc;
-    }
-
+    .shape-info { font-size: 0.68rem; color: #888; line-height: 1.9; }
+    .shape-info span { color: #ccc; }
     #status {
       font-size: 0.72rem;
-      color: #444;
-      margin-top: 10px;
-      text-align: center;
+      color: #ff9800;
       letter-spacing: 0.05em;
+      min-height: 1.2em;
     }
-
-    #no-shapes {
-      font-size: 0.72rem;
-      color: #333;
-      text-align: center;
-      margin-top: 40px;
-    }
+    #no-shapes { font-size: 0.7rem; color: #333; text-align: center; margin-top: 40px; }
   </style>
 </head>
 <body>
   <h1>Shape Recognition</h1>
+  <div id="status">Loading OpenCV.js...</div>
 
   <div id="main">
-    <div id="canvasWrapper">
-      <video id="hidden-video" autoplay playsinline></video>
+    <div>
+      <video id="video" autoplay playsinline muted style="display:none;" width="640" height="480"></video>
       <canvas id="output-canvas" width="640" height="480"></canvas>
-      <div id="status">Loading OpenCV...</div>
     </div>
-
     <div id="info-panel">
       <h2>Detected Shapes</h2>
       <div id="shape-list"><div id="no-shapes">No shapes detected</div></div>
     </div>
   </div>
 
-  <script async src="https://docs.opencv.org/4.8.0/opencv.js" onload="onOpenCvReady()"></script>
-
+  <script src="https://docs.opencv.org/4.8.0/opencv.js"></script>
   <script>
-   
     const video     = document.getElementById('video');
     const canvas    = document.getElementById('output-canvas');
     const ctx       = canvas.getContext('2d');
