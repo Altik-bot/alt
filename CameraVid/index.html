@@ -98,24 +98,27 @@
 
     function spawnDots(n) {
       dots = Array.from({ length: n }, (_, i) => randomDot(i));
-      pairs = randomPairs(n);
+      pairs = nearestPairs(dots);
       updateCount();
     }
 
-    // Pick roughly n random unique pairs (no duplicates, no self-pairs)
-    function randomPairs(n) {
-      if (n < 2) return [];
-      const all = [];
-      for (let i = 0; i < n; i++)
-        for (let j = i + 1; j < n; j++)
-          all.push([i, j]);
-      // Shuffle and take roughly half, minimum 1
-      for (let i = all.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [all[i], all[j]] = [all[j], all[i]];
-      }
-      const count = Math.max(1, Math.floor(all.length / 2));
-      return all.slice(0, count);
+    // Each dot connects only to its nearest neighbor
+    function nearestPairs(dots) {
+      const result = [];
+      const added = new Set();
+      dots.forEach((a, i) => {
+        let minDist = Infinity, nearest = -1;
+        dots.forEach((b, j) => {
+          if (i === j) return;
+          const d = dist(a, b);
+          if (d < minDist) { minDist = d; nearest = j; }
+        });
+        if (nearest !== -1) {
+          const key = [Math.min(i, nearest), Math.max(i, nearest)].join('-');
+          if (!added.has(key)) { added.add(key); result.push([i, nearest]); }
+        }
+      });
+      return result;
     }
 
     function updateCount() {
@@ -221,9 +224,9 @@
         // Glow
         ctx.beginPath();
         ctx.arc(dot.x, dot.y, 7, 0, 2 * Math.PI);
-        ctx.strokeStyle = dot.color;
+        ctx.strokeStyle = '#ffffff';
         ctx.lineWidth = 1.2;
-        ctx.shadowColor = dot.color;
+        ctx.shadowColor = '#ffffff';
         ctx.shadowBlur = 8;
         ctx.stroke();
         ctx.shadowBlur = 0;
@@ -231,7 +234,7 @@
         // Fill
         ctx.beginPath();
         ctx.arc(dot.x, dot.y, 4, 0, 2 * Math.PI);
-        ctx.fillStyle = dot.color;
+        ctx.fillStyle = '#ffffff';
         ctx.fill();
 
         // Number
