@@ -47,7 +47,7 @@
     #dot-count { font-size: 0.65rem; color: #444; }
     #status { font-size: 0.68rem; color: #ff9800; min-height: 1.1em; }
     #canvas-wrapper { width: 100%; max-width: 720px; }
-    #output-canvas { display: block; width: 100%; height: auto; border: 1px solid #222; }
+    #output-canvas { display: block; width: 100%; height: auto; border: 1px solid #222; object-fit: cover; }
   </style>
 </head>
 <body>
@@ -75,18 +75,20 @@
     const clearBtn = document.getElementById('clear-btn');
 
     const W = 720, H = 960;
+    let CW = W, CH = H; // actual canvas dims, set after video loads
     const MARGIN = 60;
 
-    const DOT_COLOR = '#000000';
+    const DOT_COLOR = '#ffffff';
 
     let dots = [];
+    let pairs = [];
     let running = false;
 
     // Each dot drifts slowly so they feel alive
     function randomDot(i) {
       return {
-        x:  MARGIN + Math.random() * (W - MARGIN * 2),
-        y:  MARGIN + Math.random() * (H - MARGIN * 2),
+        x:  MARGIN + Math.random() * (CW - MARGIN * 2),
+        y:  MARGIN + Math.random() * (CH - MARGIN * 2),
         vx: (Math.random() - 0.5) * 0.6,
         vy: (Math.random() - 0.5) * 0.6,
         color: DOT_COLOR,
@@ -96,13 +98,30 @@
 
     function spawnDots(n) {
       dots = Array.from({ length: n }, (_, i) => randomDot(i));
+      pairs = randomPairs(n);
       updateCount();
+    }
+
+    // Pick roughly n random unique pairs (no duplicates, no self-pairs)
+    function randomPairs(n) {
+      if (n < 2) return [];
+      const all = [];
+      for (let i = 0; i < n; i++)
+        for (let j = i + 1; j < n; j++)
+          all.push([i, j]);
+      // Shuffle and take roughly half, minimum 1
+      for (let i = all.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [all[i], all[j]] = [all[j], all[i]];
+      }
+      const count = Math.max(1, Math.floor(all.length / 2));
+      return all.slice(0, count);
     }
 
     function updateCount() {
       const n = dots.length;
-      const pairs = n < 2 ? 0 : (n * (n - 1)) / 2;
-      countEl.textContent = `${n} dot${n !== 1 ? 's' : ''} · ${pairs} line${pairs !== 1 ? 's' : ''}`;
+      const p = pairs.length;
+      countEl.textContent = `${n} dot${n !== 1 ? 's' : ''} · ${p} line${p !== 1 ? 's' : ''}`;
     }
 
     slider.addEventListener('input', () => spawnDots(parseInt(slider.value)));
@@ -122,6 +141,11 @@
       video.onloadedmetadata = () => {
         video.play();
         setTimeout(() => {
+          // Match canvas exactly to what the camera delivers
+          CW = video.videoWidth  || W;
+          CH = video.videoHeight || H;
+          canvas.width  = CW;
+          canvas.height = CH;
           statusEl.textContent = '';
           running = true;
           spawnDots(parseInt(slider.value));
@@ -139,10 +163,10 @@
       dots.forEach(d => {
         d.x += d.vx;
         d.y += d.vy;
-        if (d.x < MARGIN || d.x > W - MARGIN) d.vx *= -1;
-        if (d.y < MARGIN || d.y > H - MARGIN) d.vy *= -1;
-        d.x = Math.max(MARGIN, Math.min(W - MARGIN, d.x));
-        d.y = Math.max(MARGIN, Math.min(H - MARGIN, d.y));
+        if (d.x < MARGIN || d.x > CW - MARGIN) d.vx *= -1;
+        if (d.y < MARGIN || d.y > CH - MARGIN) d.vy *= -1;
+        d.x = Math.max(MARGIN, Math.min(CW - MARGIN, d.x));
+        d.y = Math.max(MARGIN, Math.min(CH - MARGIN, d.y));
       });
     }
 
@@ -153,17 +177,16 @@
 
     // ── Draw ────────────────────────────────────────────────
     function draw() {
-      ctx.drawImage(video, 0, 0, W, H);
+      ctx.drawImage(video, 0, 0, CW, CH);
 
       // Subtle dark overlay
       ctx.fillStyle = 'rgba(0,0,0,0.28)';
-      ctx.fillRect(0, 0, W, H);
+      ctx.fillRect(0, 0, CW, CH);
 
       if (dots.length < 2) return;
 
-      // Lines between every pair
-      for (let i = 0; i < dots.length; i++) {
-        for (let j = i + 1; j < dots.length; j++) {
+      // Lines between random pairs only
+      pairs.forEach(([i, j]) => {
           const a = dots[i];
           const b = dots[j];
           const d = dist(a, b);
@@ -191,8 +214,7 @@
           ctx.textAlign = 'center';
           ctx.textBaseline = 'middle';
           ctx.fillText(label, mx, my);
-        }
-      }
+      });
 
       // Small dots on top
       dots.forEach(dot => {
