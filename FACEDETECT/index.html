@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Face detect</title>
+</head>
+<body>
+    <div class="container"></div>
+    <div class = "buttons">
+<div class="buttons">
+  <a href="autho.html" class="btn" id="sign_up">sign up</a>
+  <a href="autho.html" class="btn" id="log_in">log in</a>
+</div>
+    </div>
+    <div class = "main">
+        <h1>Security access face id</h1>
+        
+        <p>Secure access system using face recognition and digital tokens.
+Control entry, track activity, and protect rooms.</p>
+   
+    </div>
+    <div class = "get_started">
+        <button> Get started</button>
+        <h1>Why it matters</h1>
+        <div class = "boxes">
+            <div class="box_1">
+                <img src = "image-removebg-preview (4).png">
+             <h2>Face recognition</h2>
+             <p>Scans and verifies users in real time with high accuracy.</p>   
+            </div>
+            <div class="box_1">
+                <img src = "magnifying_glass.png   ">
+             <h2>Access control</h2>
+             <p>Grants entry only to authorized staff based on roles.</p>   
+            </div>
+            <div class="box_1">
+                <img src = "list.png">
+             <h2>Activity logs</h2>
+             <p>Records user, time, and room for every access event.</p>   
+            </div>    
+        </div>
+    </div>
+    <div class="how-it-works"> <h2>How it works</h2> <div class="timeline"> <div class="line"></div>
+<div class="step">
+  <div class="dot">1</div>
+  <h3>Scan face</h3>
+  <p>Camera captures the user's face.</p>
+</div>
+
+<div class="step">
+  <div class="dot">2</div>
+  <h3>Match with database</h3>
+  <p>System compares with registered faces.</p>
+</div>
+
+<div class="step">
+  <div class="dot">3</div>
+  <h3>Verify access rights</h3>
+  <p>Checks permissions and roles.</p>
+</div>
+
+<div class="step">
+  <div class="dot">4</div>
+  <h3>Grant or deny entry</h3>
+  <p>System allows or blocks access.</p>
+</div>
+
+<div class="step">
+  <div class="dot">5</div>
+  <h3>Log the event</h3>
+  <p>Stores all access details.</p>
+</div>
+</div>
+</div>
+<div class = "admin_panel">
+<div class="admin_panel">
+
+  <div class="text">
+    <h2>Admin panel</h2>
+
+    <p>
+      Manage users, assign permissions, and monitor system activity.
+    </p>
+
+    <ul>
+      <li>Add or remove users</li>
+      <li>Set room permissions</li>
+      <li>View logs</li>
+      <li>Monitor system</li>
+    </ul>
+  </div>
+
+  <div class="dashboard">
+
+    <div class="cards">
+      <div class="card">
+        <h3>Total users</h3>
+        <p>128</p>
+      </div>
+
+      <div class="card">
+        <h3>Active today</h3>
+        <p>96</p>
+      </div>
+
+      <div class="card">
+        <h3>Denied attempts</h3>
+        <p>3</p>
+      </div>
+
+      <div class="card">
+        <h3>Rooms</h3>
+        <p>24</p>
+      </div>
+    </div>
+
+    <div class="logs">
+      <h3>Recent logs</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>User</th>
+            <th>Room</th>
+            <th>Method</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>10:32</td>
+            <td>A. Sembat</td>
+            <td>Lab 2</td>
+            <td>Face ID</td>
+            <td class="granted">Granted</td>
+          </tr>
+
+          <tr>
+            <td>10:28</td>
+            <td>M. Ali</td>
+            <td>Classroom 5</td>
+            <td>Token</td>
+            <td class="granted">Granted</td>
+          </tr>
+
+          <tr>
+            <td>10:15</td>
+            <td>D. Nur</td>
+            <td>Lab 4</td>
+            <td>Face ID</td>
+            <td class="denied">Denied</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>
+
+<style>
+.dashboard {
+  width: 60%;
+  background: #22332b;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.cards {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.card {
+  background: #344e41;
+  padding: 15px;
+  border-radius: 12px;
+  flex: 1;
+}
+
+.card h3 {
+  font-size: 14px;
+  color: #afbe94;
+}
+
+.card p {
+  font-size: 22px;
+  color: #faf7ed;
+}
+
+.logs h3 {
+  color: #afbe94;
+  margin-bottom: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #344e41;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+th {
+  background: #a3b18a;
+  color: #344e41;
+  padding: 10px;
+  text-align: left;
+}
+
+td {
+  padding: 10px;
+  color: #dae9c1;
+}
+
+tr:nth-child(even) {
+  background: #2b4036;
+}
+
+.granted {
+  color: #afbe94;
+}
+
+.denied {
+  color: #d96c6c;
+}
+</style>
+</div> 
+</body>
+</html>
