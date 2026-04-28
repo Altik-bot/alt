@@ -220,7 +220,9 @@ body {
  .admin_panel{
     display:flex;
     flex-direction: row;
-    justify-content:space-between;
+    justify-content:center;
+   margin:20px;
+   
  }
  .dashboard {
   width: 60%;
