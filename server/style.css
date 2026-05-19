@@ -1,0 +1,96 @@
+body {
+  margin: 0;
+  font-family: Poppins, sans-serif;
+  background: #0b1220;
+  color: white;
+}
+
+header {
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 18px;
+  background: #0f172a;
+  border-bottom: 1px solid #1f2937;
+}
+
+.logo {
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.actions button {
+  margin-left: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  background: #111827;
+  color: white;
+  cursor: pointer;
+  font-family: Poppins, sans-serif;
+  font-weight: 500;
+}
+
+.actions button:hover {
+  background: #1f2937;
+}
+
+.layout {
+  display: flex;
+  height: calc(100vh - 60px);
+}
+
+.panel {
+  width: 240px;
+  padding: 16px;
+  background: rgba(15, 23, 42, 0.9);
+  backdrop-filter: blur(10px);
+  border-right: 1px solid #1f2937;
+}
+
+.section-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: #94a3b8;
+  margin-top: 14px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.status {
+  font-size: 14px;
+  font-weight: 400;
+  color: #cbd5e1;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0;
+  font-size: 14px;
+  font-weight: 400;
+  color: #cbd5e1;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.low { background: #9ca3af; }
+.medium { background: #6b7280; }
+.high { background: #374151; }
+.very { background: #111827; }
+
+#map {
+  flex: 1;
+}
+
+@media (max-width: 700px) {
+  .panel {
+    display: none;
+  }
+}
